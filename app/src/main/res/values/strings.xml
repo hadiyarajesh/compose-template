@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ComposeTemplate</string>
+    <string name="welcome_message">Welcome to Jetpack Compose</string>
+</resources>
