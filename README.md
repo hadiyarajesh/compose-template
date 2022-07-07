@@ -1,7 +1,7 @@
 # Compose-template
-Template project built with Jetpack Compose which can be used to start new Android Jetpack Compose based project.
+This is a template project which can be used to start new Jetpack Compose based Android project.
 
-It uses following libraries
+It includes following libraries
 - [Hilt](https://dagger.dev/hilt)
 - [Retrofit](https://github.com/square/retrofit)
 - [Moshi](https://github.com/square/moshi)
