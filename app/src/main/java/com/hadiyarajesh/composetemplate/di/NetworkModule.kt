@@ -2,7 +2,7 @@ package com.hadiyarajesh.composetemplate.di
 
 import com.hadiyarajesh.composetemplate.BuildConfig
 import com.hadiyarajesh.composetemplate.utility.Constants
-import com.hadiyarajesh.flower.calladpater.FlowCallAdapterFactory
+import com.hadiyarajesh.flower_retrofit.FlowerCallAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -17,12 +17,16 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
-    private val moshi: Moshi = Moshi.Builder()
-        .build()
-
     private fun getLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
             .setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi {
+        return Moshi.Builder()
+            .build()
     }
 
     @Provides
@@ -43,13 +47,14 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
+        moshi: Moshi
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(Constants.API_BASE_URL)
             .client(okHttpClient)
-            .addCallAdapterFactory(FlowCallAdapterFactory.create())
             .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(FlowerCallAdapterFactory.create())
             .build()
     }
 }

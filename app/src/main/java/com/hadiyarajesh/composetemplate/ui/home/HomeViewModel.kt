@@ -11,6 +11,6 @@ class HomeViewModel @Inject constructor(
     private val homeRepository: HomeRepository
 ) : ViewModel() {
     init {
-        Log.i(HomeViewModel::class.simpleName, "ViewModel initialized")
+        Log.i(this::class.simpleName, "ViewModel initialized")
     }
 }

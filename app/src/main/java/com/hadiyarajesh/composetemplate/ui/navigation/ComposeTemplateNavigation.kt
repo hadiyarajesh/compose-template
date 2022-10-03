@@ -20,7 +20,7 @@ fun ComposeTemplateNavigation(
         startDestination = Screens.Home.route
     ) {
         composable(route = Screens.Home.route) {
-            val homeViewModel = hiltViewModel<HomeViewModel>()
+            val homeViewModel: HomeViewModel = hiltViewModel()
             HomeScreen(
                 navController = navController,
                 homeViewModel = homeViewModel

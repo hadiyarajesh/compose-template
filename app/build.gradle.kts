@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.hadiyarajesh.composetemplate"
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.hadiyarajesh.composetemplate"
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -52,20 +52,23 @@ android {
 }
 
 object LibVersion {
-    const val composeVersion = "1.2.0"
-    const val composeCompilerVersion = "1.2.0"
+    const val composeVersion = "1.2.1"
+    const val composeCompilerVersion = "1.3.1"
+    const val navigationCompose = "2.5.2"
     const val retrofitVersion = "2.9.0"
     const val moshiVersion = "1.13.0"
+    const val coilVersion = "2.2.0"
+    const val flowerVersion = "3.0.0"
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.activity:activity-compose:1.5.1")
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.activity:activity-compose:1.6.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     implementation("androidx.compose.ui:ui:${LibVersion.composeVersion}")
     implementation("androidx.compose.material:material:${LibVersion.composeVersion}")
     implementation("androidx.compose.ui:ui-tooling-preview:${LibVersion.composeVersion}")
-    implementation("androidx.navigation:navigation-compose:2.5.1")
+    implementation("androidx.navigation:navigation-compose:${LibVersion.navigationCompose}")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     implementation("com.google.dagger:hilt-android:${rootProject.extra["hiltVersion"]}")
     kapt("com.google.dagger:hilt-android-compiler:${rootProject.extra["hiltVersion"]}")
@@ -77,12 +80,12 @@ dependencies {
     implementation("com.squareup.moshi:moshi:${LibVersion.moshiVersion}")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:${LibVersion.moshiVersion}")
 
-    implementation("io.coil-kt:coil-compose:2.1.0") {
-        because("We need image loading library")
+    implementation("io.coil-kt:coil-compose:${LibVersion.coilVersion}") {
+        because("An image loading library for Android backed by Kotlin Coroutines")
     }
 
-    implementation("io.github.hadiyarajesh:flower:2.0.3") {
-        because("We need networking and database caching")
+    implementation("io.github.hadiyarajesh.flower-retrofit:flower-retrofit:${LibVersion.flowerVersion}") {
+        because("Flower simplifies networking and database caching on Android/Multiplatform")
     }
 
     testImplementation("junit:junit:4.13.2")
