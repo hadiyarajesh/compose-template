@@ -17,10 +17,11 @@ fun ComposeTemplateNavigation(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = Screens.Home.route
+        startDestination = TopLevelDestination.Home.route
     ) {
-        composable(route = Screens.Home.route) {
+        composable(route = TopLevelDestination.Home.route) {
             val homeViewModel: HomeViewModel = hiltViewModel()
+
             HomeScreen(
                 navController = navController,
                 homeViewModel = homeViewModel
