@@ -1,5 +1,5 @@
 # Compose-template
-This is a quick-start template project for creating new Jetpack Compose based Android projects.
+This is a quick-start template project for creating new Jetpack Compose based Android projects, following [MVVM architecture pattern](https://developer.android.com/topic/architecture).
 
 It includes following libraries
 - [Hilt](https://dagger.dev/hilt) - Hilt is a dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
