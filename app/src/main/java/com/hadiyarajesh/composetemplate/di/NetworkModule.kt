@@ -33,8 +33,6 @@ class NetworkModule {
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-            .followRedirects(true)
-            .followSslRedirects(true)
             .retryOnConnectionFailure(true)
             .also {
                 if (BuildConfig.DEBUG) {
