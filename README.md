@@ -10,4 +10,6 @@ It includes following libraries
 
 To get started quickly, click the green button at the top (as shown below)
 
-![Screenshot_20221210_052454](https://user-images.githubusercontent.com/12107428/206853842-511e4320-14a4-4fb2-b81c-7f5312b0699e.png)
+<picture>
+  <img alt="Use this template" src="https://user-images.githubusercontent.com/12107428/206853842-511e4320-14a4-4fb2-b81c-7f5312b0699e.png">
+</picture>
