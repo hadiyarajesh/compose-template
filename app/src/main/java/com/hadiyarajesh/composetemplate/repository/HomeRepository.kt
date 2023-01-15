@@ -7,6 +7,6 @@ import javax.inject.Singleton
 @Singleton
 class HomeRepository @Inject constructor() {
     init {
-        Log.i(this::class.simpleName, "Repository initialized")
+        Log.i(this::class.simpleName, "${this::class.simpleName} initialized")
     }
 }

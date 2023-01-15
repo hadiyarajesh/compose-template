@@ -25,6 +25,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -53,7 +54,7 @@ android {
 
 object LibVersion {
     const val composeCompilerVersion = "1.3.2"
-    const val navigationCompose = "2.5.2"
+    const val navigationCompose = "2.5.3"
     const val retrofitVersion = "2.9.0"
     const val moshiVersion = "1.13.0"
     const val coilVersion = "2.2.2"
@@ -91,8 +92,8 @@ dependencies {
     }
 
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.4")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     // UI Tests
     androidTestImplementation(composeBom)
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
