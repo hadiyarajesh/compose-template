@@ -35,6 +35,9 @@ class NetworkModule {
         return OkHttpClient.Builder()
             .retryOnConnectionFailure(true)
             .also {
+                /**
+                 * Only add [HttpLoggingInterceptor] on debug build
+                 */
                 if (BuildConfig.DEBUG) {
                     it.addInterceptor(getLoggingInterceptor())
                 }
@@ -51,8 +54,8 @@ class NetworkModule {
         return Retrofit.Builder()
             .baseUrl(Constants.API_BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .addCallAdapterFactory(FlowerCallAdapterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi)) // Register Moshi as a JSON converter for serialization and deserialization of objects.
+            .addCallAdapterFactory(FlowerCallAdapterFactory.create()) // Register Flower as a response converter for supporting method return types other than Call<T>.
             .build()
     }
 }
