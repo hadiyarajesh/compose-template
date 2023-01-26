@@ -1,6 +1,6 @@
 # Compose Template
 
-This template repository provides a quick start for creating new Android apps using [Jetpack Compose](https://developer.android.com/jetpack/compose) as the UI framework, following [MVVM architecture pattern](https://developer.android.com/topic/architecture).
+This template repository provides a quick start for creating new Android apps using [Jetpack Compose](https://developer.android.com/jetpack/compose) as the UI framework and following the [MVVM architecture pattern](https://developer.android.com/topic/architecture).
 
 It includes the following popular libraries:
 
