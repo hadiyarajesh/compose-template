@@ -12,6 +12,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.hadiyarajesh.composetemplate.R
 
@@ -31,13 +32,29 @@ fun HomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(innerPadding)
         ) {
-            Text(
-                text = stringResource(id = R.string.welcome_message)
-            )
+            HomeScreenContent(modifier = Modifier.fillMaxSize())
         }
     }
+}
+
+@Composable
+private fun HomeScreenContent(
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = stringResource(id = R.string.welcome_message))
+    }
+
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun HomeScreenContentPreview() {
+    HomeScreenContent(modifier = Modifier.fillMaxSize())
 }
