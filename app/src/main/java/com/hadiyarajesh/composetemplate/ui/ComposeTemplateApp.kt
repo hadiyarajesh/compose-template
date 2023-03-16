@@ -6,17 +6,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.hadiyarajesh.composetemplate.ui.navigation.ComposeTemplateNavigation
-import com.hadiyarajesh.composetemplate.ui.theme.ComposeTemplateTheme
+import com.hadiyarajesh.composetemplate.ui.navigation.AppNavigation
+import com.hadiyarajesh.composetemplate.ui.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ComposeTemplateApp() {
-    ComposeTemplateTheme {
+    AppTheme {
         val navController = rememberNavController()
 
         Scaffold { innerPadding ->
-            ComposeTemplateNavigation(
+            AppNavigation(
                 modifier = Modifier.padding(innerPadding),
                 navController = navController
             )

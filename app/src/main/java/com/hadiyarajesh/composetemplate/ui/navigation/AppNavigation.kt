@@ -10,7 +10,7 @@ import com.hadiyarajesh.composetemplate.ui.home.HomeScreen
 import com.hadiyarajesh.composetemplate.ui.home.HomeViewModel
 
 @Composable
-fun ComposeTemplateNavigation(
+fun AppNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController,
 ) {

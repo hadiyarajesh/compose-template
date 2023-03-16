@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("kotlin-android")
     id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp")
     kotlin("kapt")
 }
 
@@ -56,6 +57,7 @@ object LibVersion {
     const val composeVersion = "2023.01.00"
     const val composeCompilerVersion = "1.4.0"
     const val navigationCompose = "2.5.3"
+    const val roomVersion = "2.5.0"
     const val retrofitVersion = "2.9.0"
     const val moshiVersion = "1.14.0"
     const val coilVersion = "2.2.2"
@@ -67,8 +69,8 @@ dependencies {
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.activity:activity-compose:1.6.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
-    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0-beta01")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.0")
     implementation(composeBom)
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -78,12 +80,16 @@ dependencies {
     implementation("com.google.dagger:hilt-android:${rootProject.extra["hiltVersion"]}")
     kapt("com.google.dagger:hilt-android-compiler:${rootProject.extra["hiltVersion"]}")
 
+    implementation("androidx.room:room-runtime:${LibVersion.roomVersion}")
+    implementation("androidx.room:room-ktx:${LibVersion.roomVersion}")
+    ksp("androidx.room:room-compiler:${LibVersion.roomVersion}")
+
     implementation("com.squareup.retrofit2:retrofit:${LibVersion.retrofitVersion}")
     implementation("com.squareup.retrofit2:converter-moshi:${LibVersion.retrofitVersion}")
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     implementation("com.squareup.moshi:moshi:${LibVersion.moshiVersion}")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:${LibVersion.moshiVersion}")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:${LibVersion.moshiVersion}")
 
     implementation("io.coil-kt:coil-compose:${LibVersion.coilVersion}") {
         because("An image loading library for Android backed by Kotlin Coroutines")
@@ -102,6 +108,12 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     // Android Studio Preview support
     debugImplementation("androidx.compose.ui:ui-tooling")
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+    arg("room.incremental", "true")
+    arg("room.expandProjection", "true")
 }
 
 // To create Kapt-generated stubs for JDK 17
