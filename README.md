@@ -11,19 +11,19 @@ It includes the following popular libraries:
 - [Coil](https://github.com/coil-kt/coil) - Image loading for Android backed by Kotlin Coroutines.
 - [Flower](https://github.com/hadiyarajesh/flower) - Flower simplifies networking and database caching on Android/Multiplatform.
 
-### How to use
+## How to use
 To use this template, simply click on the **Use this template** button at the top (or fork the repository) and start building your app on top of it. 
 Make sure to update the package name and other app-specific details before building and deploying your app.
 
-### Annotation Processing
+## Annotation Processing
 This project uses Kotlin Symbol Processing (KSP) for annotation processing, which provides faster build times compared to KAPT. However, some dependencies may not support KSP yet, which is why KAPT is still used in some cases (like Hilt).
 
-### Build and Configuration Caching
+## Build and Configuration Caching
 This project also takes advantage of Gradle's [Build Cache](https://docs.gradle.org/current/userguide/build_cache.html) and [Configuration Cache](https://docs.gradle.org/current/userguide/configuration_cache.html) features to speed up builds and reduce build times.
 Note that these features may not always provide significant improvements in build times depending on the project structure and build complexity.
 
-### Contribution
+## Contribution
 Contributions to this project are welcome! If you encounter any problems or have suggestions for improvement, feel free to submit a pull request or open an issue.
 
-### License
-This project is licensed under the MIT License.
+## License
+This project is licensed under the [MIT License](https://github.com/hadiyarajesh/compose-template/blob/master/LICENSE).
