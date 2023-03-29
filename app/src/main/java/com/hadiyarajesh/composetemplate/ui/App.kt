@@ -11,7 +11,7 @@ import com.hadiyarajesh.composetemplate.ui.theme.AppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ComposeTemplateApp() {
+fun App() {
     AppTheme {
         val navController = rememberNavController()
 

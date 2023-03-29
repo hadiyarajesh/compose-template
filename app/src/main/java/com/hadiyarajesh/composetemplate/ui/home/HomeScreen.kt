@@ -23,11 +23,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel
 ) {
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(text = stringResource(id = R.string.app_name)) }
-            )
-        }
+        topBar = { TopAppBar(title = { Text(text = stringResource(id = R.string.app_name)) }) }
     ) { innerPadding ->
         Column(
             modifier = Modifier
