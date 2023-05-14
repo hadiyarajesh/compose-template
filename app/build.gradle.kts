@@ -46,7 +46,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = LibVersion.composeCompilerVersion
     }
-    packagingOptions {
+    packaging {
         resources {
             excludes += setOf("/META-INF/{AL2.0,LGPL2.1}")
         }
@@ -54,21 +54,21 @@ android {
 }
 
 object LibVersion {
-    const val composeVersion = "2023.03.00"
-    const val composeCompilerVersion = "1.4.4"
+    const val composeVersion = "2023.05.01"
+    const val composeCompilerVersion = "1.4.7"
     const val navigationCompose = "2.5.3"
     const val roomVersion = "2.5.1"
     const val retrofitVersion = "2.9.0"
     const val moshiVersion = "1.14.0"
-    const val coilVersion = "2.2.2"
+    const val coilVersion = "2.3.0"
     const val flowerVersion = "3.1.0"
 }
 
 dependencies {
     val composeBom = platform("androidx.compose:compose-bom:${LibVersion.composeVersion}")
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.activity:activity-compose:1.7.0")
+    implementation("androidx.core:core-ktx:1.10.0")
+    implementation("androidx.activity:activity-compose:1.7.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
     implementation(composeBom)
