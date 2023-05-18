@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">ComposeTemplate</string>
     <string name="welcome_message">Welcome to Compose Template</string>
+    <string name="detail_screen">Detail Screen</string>
+    <string name="back">back</string>
+    <string name="go_back">Go back</string>
+    <string name="home_screen">Home Screen</string>
+    <string name="you_are_coming_from">You are coming from: %1$s</string>
+    <string name="go_to_screen">Go to %1$s screen</string>
 </resources>
