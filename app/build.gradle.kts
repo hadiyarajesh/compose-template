@@ -110,13 +110,14 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
 }
 
+// Pass options to Room ksp processor
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
     arg("room.incremental", "true")
     arg("room.expandProjection", "true")
 }
 
-// To create Kapt-generated stubs for JDK 17
+// Make Kapt-generated stubs to target JDK 17
 tasks.withType<org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask>().configureEach {
     kotlinOptions.jvmTarget = "17"
 }

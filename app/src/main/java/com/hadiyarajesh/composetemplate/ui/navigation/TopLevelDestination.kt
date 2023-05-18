@@ -16,6 +16,13 @@ sealed class TopLevelDestination(
         unselectedIcon = R.drawable.ic_launcher_foreground
     )
 
+    object Detail : TopLevelDestination(
+        title = "Detail",
+        route = "detail",
+        selectedIcon = R.drawable.ic_launcher_foreground,
+        unselectedIcon = R.drawable.ic_launcher_foreground
+    )
+
     /**
      * Use this function to pass arguments to navigation destination
      */
