@@ -1,26 +1,17 @@
 package com.hadiyarajesh.composetemplate.ui.navigation
 
-import androidx.annotation.DrawableRes
-import com.hadiyarajesh.composetemplate.R
-
 sealed class TopLevelDestination(
     val title: String,
-    val route: String,
-    @DrawableRes val selectedIcon: Int,
-    @DrawableRes val unselectedIcon: Int
+    val route: String
 ) {
-    object Home : TopLevelDestination(
+    data object Home : TopLevelDestination(
         title = "Home",
-        route = "home",
-        selectedIcon = R.drawable.ic_launcher_foreground,
-        unselectedIcon = R.drawable.ic_launcher_foreground
+        route = "home"
     )
 
-    object Detail : TopLevelDestination(
+    data object Detail : TopLevelDestination(
         title = "Detail",
-        route = "detail",
-        selectedIcon = R.drawable.ic_launcher_foreground,
-        unselectedIcon = R.drawable.ic_launcher_foreground
+        route = "detail"
     )
 
     /**
