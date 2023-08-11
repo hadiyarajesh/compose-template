@@ -18,6 +18,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         Log.i(this::class.simpleName, "${this::class.simpleName} initialized")
+
         _response.value = HomeScreenUiState.Loading
         val msg = homeRepository.loadData()
         _response.value = HomeScreenUiState.Success(data = msg)
