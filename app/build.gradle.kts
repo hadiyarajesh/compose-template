@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "com.hadiyarajesh.composetemplate"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.hadiyarajesh.composetemplate"
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
