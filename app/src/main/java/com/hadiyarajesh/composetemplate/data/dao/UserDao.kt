@@ -8,8 +8,8 @@ import com.hadiyarajesh.composetemplate.data.entity.User
 @Dao
 interface UserDao {
     @Upsert
-    fun insertOrUpdateUser(user: User)
+    suspend fun insertOrUpdateUser(user: User): Long
 
     @Query("SELECT * FROM User WHERE userId = :userId")
-    fun getUser(userId: Long): User
+    suspend fun getUser(userId: Long): User
 }
