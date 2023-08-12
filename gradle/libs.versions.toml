@@ -31,14 +31,14 @@ activity-compose = { group = "androidx.activity", name = "activity-compose", ver
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 ui = { group = "androidx.compose.ui", name = "ui" }
 ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
 navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation" }
 hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
@@ -46,10 +46,10 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
 okhttp-interceptor-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp-logging-interceptor" }
-moshi = { group="com.squareup.moshi", name="moshi", version.ref="moshi"}
-moshi-kotlin-codegen = { group="com.squareup.moshi", name="moshi-kotlin-codegen", version.ref="moshi"}
-coil = { group="io.coil-kt", name="coil-compose", version.ref="coil"}
-flower = { group="io.github.hadiyarajesh.flower-retrofit", name="flower-retrofit", version.ref="flower"}
+moshi = { group = "com.squareup.moshi", name = "moshi", version.ref = "moshi" }
+moshi-kotlin-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+flower = { group = "io.github.hadiyarajesh.flower-retrofit", name = "flower-retrofit", version.ref = "flower" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -58,3 +58,9 @@ hiltAndroid = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 [bundles]
+lifecycle = ["lifecycle-runtime-ktx", "lifecycle-runtime-compose"]
+compose-ui-impl = ["ui", "ui-graphics", "ui-tooling-preview"]
+compose-ui-debug = ["ui-tooling", "ui-test-manifest"]
+room = ["room-runtime", "room-ktx"]
+retrofit = ["retrofit", "retrofit-converter-moshi"]
+moshi = ["moshi", "moshi-kotlin-codegen"]

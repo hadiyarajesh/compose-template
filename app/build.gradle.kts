@@ -57,29 +57,23 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.activity.compose)
-    implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.lifecycle.runtime.compose)
+    implementation(libs.bundles.lifecycle)
     implementation(platform(libs.compose.bom))
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
+    implementation(libs.bundles.compose.ui.impl)
     implementation(libs.material3)
     implementation(libs.navigation.compose)
 
-    implementation(libs.hilt.navigation)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation)
     kapt(libs.hilt.android.compiler)
 
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
+    implementation(libs.bundles.room)
     ksp(libs.room.compiler)
 
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.bundles.retrofit)
     implementation(libs.okhttp.interceptor.logging)
 
-    implementation(libs.moshi)
-    implementation(libs.moshi.kotlin.codegen)
+    implementation(libs.bundles.moshi)
 
     implementation(libs.coil) {
         because("An image loading library for Android backed by Kotlin Coroutines")
@@ -94,8 +88,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
+    debugImplementation(libs.bundles.compose.ui.debug)
 }
 
 // Pass options to Room ksp processor
