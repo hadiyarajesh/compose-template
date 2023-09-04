@@ -16,7 +16,7 @@ To use this template, simply click on the **Use this template** button at the to
 Make sure to update the package name and other app-specific details before building and deploying your app.
 
 ## Annotation Processing
-This project uses Kotlin Symbol Processing (KSP) for annotation processing, which provides faster build times compared to KAPT. However, some dependencies may not support KSP yet, which is why KAPT is still used in some cases (like Hilt).
+This project uses [Kotlin Symbol Processing (KSP)](https://kotlinlang.org/docs/ksp-overview.html) for annotation processing, which provides faster build times compared to [KAPT](https://kotlinlang.org/docs/kapt.html). ~~However, some dependencies may not support KSP yet, which is why KAPT is still used in some cases (like Hilt)~~.
 
 ## Build and Configuration Caching
 This project also takes advantage of Gradle's [Build Cache](https://docs.gradle.org/current/userguide/build_cache.html) and [Configuration Cache](https://docs.gradle.org/current/userguide/configuration_cache.html) features to speed up builds and reduce build times.
