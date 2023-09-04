@@ -31,6 +31,7 @@ fun AppNavigation(
             val homeScreenUiState by remember { homeViewModel.response }.collectAsState()
 
             HomeScreen(
+                loadData = { homeViewModel.loadData() },
                 uiState = homeScreenUiState,
                 onNavigateClick = { source ->
                     navController.navigate(TopLevelDestination.Detail.withArgs(source))

@@ -55,7 +55,13 @@ class NetworkModule {
             .baseUrl(Constants.API_BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi)) // Register Moshi as a JSON converter for serialization and deserialization of objects.
-            .addCallAdapterFactory(FlowerCallAdapterFactory.create()) // Register Flower as a response converter for supporting method return types other than Call<T>.
+            .apply {
+                /**
+                 * Register Flower as a response converter for supporting method return types other than Call<T>.
+                 * @see <a href="https://github.com/hadiyarajesh/flower">Flower</a>
+                 */
+                addCallAdapterFactory(FlowerCallAdapterFactory.create())
+            }
             .build()
     }
 }

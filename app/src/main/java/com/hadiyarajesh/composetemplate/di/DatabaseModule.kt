@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Room
 import com.hadiyarajesh.composetemplate.R
 import com.hadiyarajesh.composetemplate.data.AppDatabase
+import com.hadiyarajesh.composetemplate.data.RoomDbInitializer
+import com.hadiyarajesh.composetemplate.data.dao.MessageDao
 import com.hadiyarajesh.composetemplate.data.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module
@@ -17,15 +20,28 @@ import javax.inject.Singleton
 class DatabaseModule {
     @Singleton
     @Provides
-    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase {
+    fun provideAppDatabase(
+        @ApplicationContext context: Context,
+        messageDaoProvider: Provider<MessageDao>
+    ): AppDatabase {
         return Room.databaseBuilder(
             context.applicationContext, AppDatabase::class.java, context.getString(
                 R.string.app_name
             )
-        ).build()
+        ).addCallback(
+            /**
+             * Attach [RoomDbInitializer] as callback to the database
+             */
+            RoomDbInitializer(messageDaoProvider = messageDaoProvider, context = context)
+        )
+            .build()
     }
 
     @Singleton
     @Provides
     fun provideUserDao(appDatabase: AppDatabase): UserDao = appDatabase.userDao
+
+    @Singleton
+    @Provides
+    fun provideMessageDao(appDatabase: AppDatabase): MessageDao = appDatabase.messageDao
 }

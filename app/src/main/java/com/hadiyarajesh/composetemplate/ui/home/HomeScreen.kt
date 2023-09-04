@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -23,9 +24,14 @@ import com.hadiyarajesh.composetemplate.ui.navigation.TopLevelDestination
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
+    loadData: () -> Unit,
     uiState: HomeScreenUiState,
     onNavigateClick: (source: String) -> Unit
 ) {
+    LaunchedEffect(Unit) {
+        loadData()
+    }
+
     Scaffold(
         topBar = { TopAppBar(title = { Text(text = stringResource(id = R.string.app_name)) }) }
     ) { innerPadding ->
@@ -85,6 +91,7 @@ private fun HomeScreenContent(
 @Composable
 fun HomeScreenPreview() {
     HomeScreen(
+        loadData = {},
         uiState = HomeScreenUiState.Success(stringResource(id = R.string.welcome_message)),
         onNavigateClick = {}
     )
