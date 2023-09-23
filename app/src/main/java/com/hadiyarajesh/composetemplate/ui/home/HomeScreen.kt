@@ -17,6 +17,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.hadiyarajesh.composetemplate.R
+import com.hadiyarajesh.composetemplate.data.entity.Message
+import com.hadiyarajesh.composetemplate.ui.components.ErrorItem
 import com.hadiyarajesh.composetemplate.ui.components.LoadingIndicator
 import com.hadiyarajesh.composetemplate.ui.components.VerticalSpacer
 import com.hadiyarajesh.composetemplate.ui.navigation.TopLevelDestination
@@ -24,8 +26,8 @@ import com.hadiyarajesh.composetemplate.ui.navigation.TopLevelDestination
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    loadData: () -> Unit,
     uiState: HomeScreenUiState,
+    loadData: () -> Unit,
     onNavigateClick: (source: String) -> Unit
 ) {
     LaunchedEffect(Unit) {
@@ -33,7 +35,11 @@ fun HomeScreen(
     }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = stringResource(id = R.string.app_name)) }) }
+        topBar = {
+            TopAppBar(
+                title = { Text(text = stringResource(id = R.string.app_name)) }
+            )
+        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -41,6 +47,8 @@ fun HomeScreen(
                 .padding(innerPadding)
         ) {
             when (uiState) {
+                is HomeScreenUiState.Initial -> {}
+
                 is HomeScreenUiState.Loading -> {
                     LoadingIndicator(modifier = Modifier.fillMaxSize())
                 }
@@ -48,14 +56,17 @@ fun HomeScreen(
                 is HomeScreenUiState.Success -> {
                     HomeScreenContent(
                         modifier = Modifier.fillMaxSize(),
-                        welcomeMessage = uiState.data,
+                        welcomeMessage = uiState.msg.text,
                         onNavigateClick = onNavigateClick
                     )
                 }
 
-                is HomeScreenUiState.Error -> {}
-
-                else -> {}
+                is HomeScreenUiState.Error -> {
+                    ErrorItem(
+                        text = uiState.msg,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
             }
         }
     }
@@ -76,11 +87,17 @@ private fun HomeScreenContent(
     ) {
         Text(text = welcomeMessage)
         VerticalSpacer(size = 16)
-        Button(onClick = { onNavigateClick(context.getString(R.string.home_screen)) }) {
+        Button(
+            onClick = {
+                onNavigateClick(
+                    context.getString(R.string.screen_name).format(TopLevelDestination.Home.title)
+                )
+            }
+        ) {
             Text(
                 text = stringResource(
                     R.string.go_to_screen,
-                    TopLevelDestination.Detail.javaClass.simpleName
+                    TopLevelDestination.Detail.title
                 )
             )
         }
@@ -92,7 +109,7 @@ private fun HomeScreenContent(
 fun HomeScreenPreview() {
     HomeScreen(
         loadData = {},
-        uiState = HomeScreenUiState.Success(stringResource(id = R.string.welcome_message)),
+        uiState = HomeScreenUiState.Success(msg = Message(text = stringResource(id = R.string.welcome_message))),
         onNavigateClick = {}
     )
 }

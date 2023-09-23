@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.ksp)
+    kotlin("kapt")
 }
 
 android {
@@ -64,7 +65,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation)
-    ksp(libs.hilt.android.compiler)
+    kapt(libs.hilt.android.compiler)
 
     implementation(libs.bundles.room)
     ksp(libs.room.compiler)
@@ -72,7 +73,8 @@ dependencies {
     implementation(libs.bundles.retrofit)
     implementation(libs.okhttp.interceptor.logging)
 
-    implementation(libs.bundles.moshi)
+    implementation(libs.moshi)
+    ksp(libs.moshi.kotlin.codegen)
 
     implementation(libs.coil) {
         because("An image loading library for Android backed by Kotlin Coroutines")
@@ -95,4 +97,14 @@ ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
     arg("room.incremental", "true")
     arg("room.expandProjection", "true")
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
+}
+
+// Make Kapt-generated stubs to target JDK 17
+tasks.withType<org.jetbrains.kotlin.gradle.internal.KaptGenerateStubsTask>().configureEach {
+    kotlinOptions.jvmTarget = "17"
 }

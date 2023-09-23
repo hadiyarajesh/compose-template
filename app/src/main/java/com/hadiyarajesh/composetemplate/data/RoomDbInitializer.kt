@@ -13,12 +13,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Provider
 
 /**
- * This class implements [RoomDatabase.Callback] and override [RoomDatabase.Callback.onCreate] method to initialise room database when it's created for the first time.
- * Using [Provider] of [UserDao] to break the circular dependency
+ * This class implements [RoomDatabase.Callback] and override [RoomDatabase.Callback.onCreate] method
+ * to initialise room database when it's created for the first time.
+ * We're using [Provider] of [MessageDao] to break the circular dependency.
  */
 class RoomDbInitializer(
-    private val messageDaoProvider: Provider<MessageDao>,
-    private val context: Context
+    private val context: Context,
+    private val messageDaoProvider: Provider<MessageDao>
 ) : RoomDatabase.Callback() {
     private val applicationScope = CoroutineScope(SupervisorJob())
 

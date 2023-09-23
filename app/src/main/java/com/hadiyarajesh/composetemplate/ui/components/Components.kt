@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,6 +44,21 @@ fun LoadingIndicator(
                 .align(Alignment.Center),
             color = color,
             strokeWidth = strokeWidth
+        )
+    }
+}
+
+@Composable
+fun ErrorItem(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.error
+) {
+    Box(modifier = modifier) {
+        Text(
+            text = text,
+            modifier = Modifier.align(Alignment.Center),
+            color = color
         )
     }
 }

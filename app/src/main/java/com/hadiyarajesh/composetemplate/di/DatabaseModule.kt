@@ -6,7 +6,6 @@ import com.hadiyarajesh.composetemplate.R
 import com.hadiyarajesh.composetemplate.data.AppDatabase
 import com.hadiyarajesh.composetemplate.data.RoomDbInitializer
 import com.hadiyarajesh.composetemplate.data.dao.MessageDao
-import com.hadiyarajesh.composetemplate.data.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,14 +31,10 @@ class DatabaseModule {
             /**
              * Attach [RoomDbInitializer] as callback to the database
              */
-            RoomDbInitializer(messageDaoProvider = messageDaoProvider, context = context)
+            RoomDbInitializer(context = context, messageDaoProvider = messageDaoProvider)
         )
             .build()
     }
-
-    @Singleton
-    @Provides
-    fun provideUserDao(appDatabase: AppDatabase): UserDao = appDatabase.userDao
 
     @Singleton
     @Provides
