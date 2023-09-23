@@ -1,5 +1,8 @@
 package com.hadiyarajesh.composetemplate.ui.navigation
 
+/**
+ * This class represents all the main screens in the app.
+ */
 sealed class TopLevelDestination(
     val title: String,
     val route: String
@@ -15,7 +18,9 @@ sealed class TopLevelDestination(
     )
 
     /**
-     * Use this function to pass arguments to navigation destination
+     * This is a helper function to pass arguments to navigation destination.
+     * For example, instead of using [TopLevelDestination.Detail.route]/first_argument/second_argument
+     * you can use like [TopLevelDestination.Detail.withArgs(first_argument, second_argument)]
      */
     fun withArgs(vararg args: Any): String {
         return buildString {

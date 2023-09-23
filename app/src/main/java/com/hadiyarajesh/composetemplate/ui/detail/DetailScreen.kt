@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.hadiyarajesh.composetemplate.R
 import com.hadiyarajesh.composetemplate.ui.components.VerticalSpacer
+import com.hadiyarajesh.composetemplate.ui.navigation.TopLevelDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -34,11 +35,18 @@ fun DetailScreen(
                     IconButton(onClick = { onBackClick() }) {
                         Icon(
                             imageVector = Icons.Default.ArrowBack,
-                            contentDescription = stringResource(R.string.back)
+                            contentDescription = stringResource(R.string.go_back)
                         )
                     }
                 },
-                title = { Text(text = stringResource(R.string.detail_screen)) })
+                title = {
+                    Text(
+                        text = stringResource(R.string.screen_name).format(
+                            TopLevelDestination.Detail.title
+                        )
+                    )
+                }
+            )
         }
     ) { innerPadding ->
         Column(
@@ -78,7 +86,7 @@ private fun DetailScreenContent(
 @Composable
 fun DetailScreenPreview() {
     DetailScreen(
-        source = stringResource(R.string.home_screen),
+        source = stringResource(R.string.screen_name).format(TopLevelDestination.Home.title),
         onBackClick = {}
     )
 }

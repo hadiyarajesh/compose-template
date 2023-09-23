@@ -2,7 +2,6 @@ package com.hadiyarajesh.composetemplate.di
 
 import com.hadiyarajesh.composetemplate.BuildConfig
 import com.hadiyarajesh.composetemplate.utility.Constants
-import com.hadiyarajesh.flower_retrofit.FlowerCallAdapterFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -34,12 +33,12 @@ class NetworkModule {
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .retryOnConnectionFailure(true)
-            .also {
+            .also { okHttpClient ->
                 /**
                  * Only add [HttpLoggingInterceptor] on debug build
                  */
                 if (BuildConfig.DEBUG) {
-                    it.addInterceptor(getLoggingInterceptor())
+                    okHttpClient.addInterceptor(getLoggingInterceptor())
                 }
             }
             .build()
@@ -55,7 +54,13 @@ class NetworkModule {
             .baseUrl(Constants.API_BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi)) // Register Moshi as a JSON converter for serialization and deserialization of objects.
-            .addCallAdapterFactory(FlowerCallAdapterFactory.create()) // Register Flower as a response converter for supporting method return types other than Call<T>.
+            .also { retrofit ->
+                /**
+                 * Register {@link <a href="https://github.com/hadiyarajesh/flower">Flower</a>} as a response converter for supporting method return types other than {@code Call<T>}.
+                 * Uncomment below line to add Flower support
+                 */
+//                retrofit.addCallAdapterFactory(FlowerCallAdapterFactory.create())
+            }
             .build()
     }
 }

@@ -1,11 +1,11 @@
 package com.hadiyarajesh.composetemplate.ui.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -28,10 +28,11 @@ fun AppNavigation(
     ) {
         composable(route = TopLevelDestination.Home.route) {
             val homeViewModel: HomeViewModel = hiltViewModel()
-            val homeScreenUiState by remember { homeViewModel.response }.collectAsState()
+            val homeScreenUiState by remember { homeViewModel.response }.collectAsStateWithLifecycle()
 
             HomeScreen(
                 uiState = homeScreenUiState,
+                loadData = { homeViewModel.loadData() },
                 onNavigateClick = { source ->
                     navController.navigate(TopLevelDestination.Detail.withArgs(source))
                 }
