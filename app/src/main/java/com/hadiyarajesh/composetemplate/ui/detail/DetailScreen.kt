@@ -19,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.hadiyarajesh.composetemplate.R
+import com.hadiyarajesh.composetemplate.navigation.TopLevelDestination
 import com.hadiyarajesh.composetemplate.ui.components.VerticalSpacer
-import com.hadiyarajesh.composetemplate.ui.navigation.TopLevelDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

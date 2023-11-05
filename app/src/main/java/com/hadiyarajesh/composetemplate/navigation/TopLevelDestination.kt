@@ -1,4 +1,4 @@
-package com.hadiyarajesh.composetemplate.ui.navigation
+package com.hadiyarajesh.composetemplate.navigation
 
 /**
  * This class represents all the main screens in the app.
