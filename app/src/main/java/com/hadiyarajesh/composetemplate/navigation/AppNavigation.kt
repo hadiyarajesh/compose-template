@@ -1,4 +1,4 @@
-package com.hadiyarajesh.composetemplate.ui.navigation
+package com.hadiyarajesh.composetemplate.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
