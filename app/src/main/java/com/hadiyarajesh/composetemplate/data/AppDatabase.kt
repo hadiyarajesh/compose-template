@@ -11,5 +11,5 @@ import com.hadiyarajesh.composetemplate.data.entity.Message
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract val messageDao: MessageDao
+    abstract fun messageDao(): MessageDao
 }

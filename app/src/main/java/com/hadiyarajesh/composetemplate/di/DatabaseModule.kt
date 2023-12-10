@@ -38,5 +38,5 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideMessageDao(appDatabase: AppDatabase): MessageDao = appDatabase.messageDao
+    fun provideMessageDao(appDatabase: AppDatabase): MessageDao = appDatabase.messageDao()
 }
