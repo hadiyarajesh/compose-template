@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class HomeRepositoryImpl @Inject constructor(
     private val messageDao: MessageDao
 ) : HomeRepository {
-    override fun loadData(): Flow<Message> {
+    override fun loadData(): Flow<Message?> {
         return messageDao.getMessage()
     }
 }

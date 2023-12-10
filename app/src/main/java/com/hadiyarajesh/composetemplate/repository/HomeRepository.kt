@@ -4,5 +4,5 @@ import com.hadiyarajesh.composetemplate.data.entity.Message
 import kotlinx.coroutines.flow.Flow
 
 interface HomeRepository {
-    fun loadData(): Flow<Message>
+    fun loadData(): Flow<Message?>
 }
