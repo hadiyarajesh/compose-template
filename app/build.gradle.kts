@@ -62,7 +62,7 @@ dependencies {
     implementation(libs.navigation.compose)
 
     implementation(libs.hilt.android)
-    implementation(libs.hilt.navigation)
+    implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)
 
     implementation(libs.bundles.room)
