@@ -11,11 +11,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hadiyarajesh.composetemplate.R
 import com.hadiyarajesh.composetemplate.data.entity.Message
 import com.hadiyarajesh.composetemplate.navigation.TopLevelDestination
@@ -23,6 +27,27 @@ import com.hadiyarajesh.composetemplate.ui.components.ErrorItem
 import com.hadiyarajesh.composetemplate.ui.components.LoadingIndicator
 import com.hadiyarajesh.composetemplate.ui.components.VerticalSpacer
 
+/**
+ * This composable function is used to be called from [AppNavigation].
+ */
+@Composable
+fun HomeRoute(
+    onNavigateClick: (source: String) -> Unit,
+    homeViewModel: HomeViewModel = hiltViewModel()
+) {
+    val homeScreenUiState by remember { homeViewModel.response }.collectAsStateWithLifecycle()
+
+    HomeScreen(
+        uiState = homeScreenUiState,
+        loadData = { homeViewModel.loadData() },
+        onNavigateClick = onNavigateClick
+    )
+}
+
+/**
+ * This composable function is used to display the content of home screen that is preview-able,
+ * which means it does not take any dependency that would be difficult to provide from compose preview.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
@@ -108,8 +133,8 @@ private fun HomeScreenContent(
 @Composable
 fun HomeScreenPreview() {
     HomeScreen(
-        loadData = {},
         uiState = HomeScreenUiState.Success(msg = Message(text = stringResource(id = R.string.welcome_message))),
+        loadData = {},
         onNavigateClick = {}
     )
 }
