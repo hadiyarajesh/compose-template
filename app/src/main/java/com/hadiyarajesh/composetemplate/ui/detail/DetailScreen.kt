@@ -22,6 +22,17 @@ import com.hadiyarajesh.composetemplate.R
 import com.hadiyarajesh.composetemplate.navigation.TopLevelDestination
 import com.hadiyarajesh.composetemplate.ui.components.VerticalSpacer
 
+@Composable
+fun DetailRoute(
+    source: String,
+    onBackClick: () -> Unit
+) {
+    DetailScreen(
+        source = source,
+        onBackClick = onBackClick
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(

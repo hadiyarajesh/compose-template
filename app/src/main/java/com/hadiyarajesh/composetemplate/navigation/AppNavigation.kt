@@ -1,19 +1,14 @@
 package com.hadiyarajesh.composetemplate.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.hadiyarajesh.composetemplate.ui.detail.DetailScreen
-import com.hadiyarajesh.composetemplate.ui.home.HomeScreen
-import com.hadiyarajesh.composetemplate.ui.home.HomeViewModel
+import com.hadiyarajesh.composetemplate.ui.detail.DetailRoute
+import com.hadiyarajesh.composetemplate.ui.home.HomeRoute
 import com.hadiyarajesh.composetemplate.utility.Constants
 
 @Composable
@@ -27,12 +22,7 @@ fun AppNavigation(
         startDestination = TopLevelDestination.Home.route
     ) {
         composable(route = TopLevelDestination.Home.route) {
-            val homeViewModel: HomeViewModel = hiltViewModel()
-            val homeScreenUiState by remember { homeViewModel.response }.collectAsStateWithLifecycle()
-
-            HomeScreen(
-                uiState = homeScreenUiState,
-                loadData = { homeViewModel.loadData() },
+            HomeRoute(
                 onNavigateClick = { source ->
                     navController.navigate(TopLevelDestination.Detail.withArgs(source))
                 }
@@ -48,7 +38,7 @@ fun AppNavigation(
         ) { backStackEntry ->
             val source = backStackEntry.arguments?.getString(Constants.SOURCE) ?: return@composable
 
-            DetailScreen(
+            DetailRoute(
                 source = source,
                 onBackClick = { navController.popBackStack() }
             )
