@@ -17,15 +17,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     private fun getLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+        return HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
     }
 
     @Singleton
     @Provides
     fun provideMoshi(): Moshi {
-        return Moshi.Builder()
-            .build()
+        return Moshi.Builder().build()
     }
 
     @Singleton
@@ -53,14 +53,7 @@ class NetworkModule {
         return Retrofit.Builder()
             .baseUrl(Constants.API_BASE_URL)
             .client(okHttpClient)
-            .addConverterFactory(MoshiConverterFactory.create(moshi)) // Register Moshi as a JSON converter for serialization and deserialization of objects.
-            .also { retrofit ->
-                /**
-                 * Register {@link <a href="https://github.com/hadiyarajesh/flower">Flower</a>} as a response converter for supporting method return types other than {@code Call<T>}.
-                 * Uncomment below line to add Flower support
-                 */
-//                retrofit.addCallAdapterFactory(FlowerCallAdapterFactory.create())
-            }
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
 }

@@ -1,6 +1,8 @@
 package com.hadiyarajesh.composetemplate.ui.components
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -19,13 +21,13 @@ import androidx.compose.ui.unit.dp
  * Create a [Spacer] of given width in [dp]
  */
 @Composable
-fun HorizontalSpacer(size: Int) = Spacer(modifier = Modifier.width(size.dp))
+fun RowScope.HorizontalSpacer(size: Int) = Spacer(modifier = Modifier.width(size.dp))
 
 /**
  * Create a [Spacer] of given height in [dp]
  */
 @Composable
-fun VerticalSpacer(size: Int) = Spacer(modifier = Modifier.height(size.dp))
+fun ColumnScope.VerticalSpacer(size: Int) = Spacer(modifier = Modifier.height(size.dp))
 
 /**
  * Create a center aligned [CircularProgressIndicator] wrapped in a [Box]
