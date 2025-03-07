@@ -28,7 +28,7 @@ import com.hadiyarajesh.composetemplate.ui.components.LoadingIndicator
 import com.hadiyarajesh.composetemplate.ui.components.VerticalSpacer
 
 /**
- * This composable function is used to be called from [AppNavigation].
+ * This composable function is used to be called from [com.hadiyarajesh.composetemplate.navigation.AppNavigation].
  */
 @Composable
 fun HomeRoute(
@@ -50,7 +50,7 @@ fun HomeRoute(
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
+private fun HomeScreen(
     uiState: HomeScreenUiState,
     loadData: () -> Unit,
     onNavigateClick: (source: String) -> Unit
@@ -88,8 +88,8 @@ fun HomeScreen(
 
                 is HomeScreenUiState.Error -> {
                     ErrorItem(
-                        text = uiState.msg,
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.fillMaxSize(),
+                        text = uiState.msg
                     )
                 }
             }

@@ -76,10 +76,6 @@ dependencies {
         because("An image loading library for Android backed by Kotlin Coroutines")
     }
 
-    implementation(libs.flower) {
-        because("Flower simplifies networking and database caching on Android/Multiplatform")
-    }
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

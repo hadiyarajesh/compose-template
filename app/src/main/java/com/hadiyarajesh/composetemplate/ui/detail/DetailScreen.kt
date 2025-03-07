@@ -35,7 +35,7 @@ fun DetailRoute(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailScreen(
+private fun DetailScreen(
     source: String,
     onBackClick: () -> Unit
 ) {
