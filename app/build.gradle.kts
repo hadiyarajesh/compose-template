@@ -72,7 +72,7 @@ dependencies {
     implementation(libs.moshi)
     ksp(libs.moshi.kotlin.codegen)
 
-    implementation(libs.coil) {
+    implementation(libs.bundles.coil) {
         because("An image loading library for Android backed by Kotlin Coroutines")
     }
 
