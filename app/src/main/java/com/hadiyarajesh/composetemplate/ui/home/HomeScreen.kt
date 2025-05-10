@@ -1,11 +1,18 @@
 package com.hadiyarajesh.composetemplate.ui.home
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -15,32 +22,47 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil3.compose.SubcomposeAsyncImage
 import com.hadiyarajesh.composetemplate.R
-import com.hadiyarajesh.composetemplate.data.entity.Message
+import com.hadiyarajesh.composetemplate.data.entity.Image
 import com.hadiyarajesh.composetemplate.navigation.TopLevelDestination
 import com.hadiyarajesh.composetemplate.ui.components.ErrorItem
 import com.hadiyarajesh.composetemplate.ui.components.LoadingIndicator
+import com.hadiyarajesh.composetemplate.ui.components.TextWithIcon
 import com.hadiyarajesh.composetemplate.ui.components.VerticalSpacer
+import com.hadiyarajesh.composetemplate.utility.Constants
 
 /**
  * This composable function is used to be called from [com.hadiyarajesh.composetemplate.navigation.AppNavigation].
  */
 @Composable
-fun HomeRoute(
+internal fun HomeRoute(
     onNavigateClick: (source: String) -> Unit,
-    homeViewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val homeScreenUiState by remember { homeViewModel.response }.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    val homeScreenUiState by remember { viewModel.uiState }.collectAsStateWithLifecycle()
 
     HomeScreen(
         uiState = homeScreenUiState,
-        loadData = { homeViewModel.loadData() },
-        onNavigateClick = onNavigateClick
+        loadData = { viewModel.loadData() },
+        onNavigateClick = {
+            onNavigateClick(
+                context.getString(
+                    R.string.screen_name,
+                    TopLevelDestination.Home.title
+                )
+            )
+        }
     )
 }
 
@@ -53,7 +75,7 @@ fun HomeRoute(
 private fun HomeScreen(
     uiState: HomeScreenUiState,
     loadData: () -> Unit,
-    onNavigateClick: (source: String) -> Unit
+    onNavigateClick: () -> Unit
 ) {
     LaunchedEffect(Unit) {
         loadData()
@@ -68,8 +90,8 @@ private fun HomeScreen(
     ) { innerPadding ->
         Column(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(innerPadding)
+                .fillMaxSize()
         ) {
             when (uiState) {
                 is HomeScreenUiState.Initial -> {}
@@ -81,14 +103,16 @@ private fun HomeScreen(
                 is HomeScreenUiState.Success -> {
                     HomeScreenContent(
                         modifier = Modifier.fillMaxSize(),
-                        welcomeMessage = uiState.msg.text,
+                        image = uiState.data,
                         onNavigateClick = onNavigateClick
                     )
                 }
 
                 is HomeScreenUiState.Error -> {
                     ErrorItem(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .fillMaxSize(),
                         text = uiState.msg
                     )
                 }
@@ -100,30 +124,47 @@ private fun HomeScreen(
 @Composable
 private fun HomeScreenContent(
     modifier: Modifier = Modifier,
-    welcomeMessage: String,
-    onNavigateClick: (source: String) -> Unit
+    image: Image,
+    onNavigateClick: () -> Unit
 ) {
-    val context = LocalContext.current
+    val imageShape = RoundedCornerShape(16.dp)
 
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = welcomeMessage)
-        VerticalSpacer(size = 16)
-        Button(
-            onClick = {
-                onNavigateClick(
-                    context.getString(R.string.screen_name).format(TopLevelDestination.Home.title)
-                )
-            }
+        Box(
+            modifier = Modifier
+                .size(300.dp)
+                .clip(imageShape)
+                .border(1.dp, Color.LightGray, imageShape)
+                .shadow(5.dp, imageShape)
         ) {
-            Text(
+            SubcomposeAsyncImage(
+                modifier = Modifier.fillMaxSize(),
+                model = image.url,
+                contentDescription = image.description,
+                loading = { LoadingIndicator(strokeWidth = 2.dp) },
+                error = { ErrorItem(text = image.altText) }
+            )
+        }
+        VerticalSpacer(size = 16)
+
+        Text(
+            text = image.description,
+            style = MaterialTheme.typography.titleSmall
+        )
+        VerticalSpacer(size = 16)
+
+        OutlinedButton(onClick = onNavigateClick) {
+            TextWithIcon(
                 text = stringResource(
                     R.string.go_to_screen,
                     TopLevelDestination.Detail.title
-                )
+                ),
+                icon = Icons.AutoMirrored.Filled.ArrowForward
+
             )
         }
     }
@@ -133,7 +174,13 @@ private fun HomeScreenContent(
 @Composable
 fun HomeScreenPreview() {
     HomeScreen(
-        uiState = HomeScreenUiState.Success(msg = Message(text = stringResource(id = R.string.welcome_message))),
+        uiState = HomeScreenUiState.Success(
+            data = Image(
+                description = stringResource(id = R.string.welcome_message),
+                altText = stringResource(id = R.string.image),
+                url = Constants.IMAGE_URL
+            )
+        ),
         loadData = {},
         onNavigateClick = {}
     )

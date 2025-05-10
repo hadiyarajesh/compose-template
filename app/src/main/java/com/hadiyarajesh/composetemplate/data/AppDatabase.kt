@@ -2,14 +2,14 @@ package com.hadiyarajesh.composetemplate.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.hadiyarajesh.composetemplate.data.dao.MessageDao
-import com.hadiyarajesh.composetemplate.data.entity.Message
+import com.hadiyarajesh.composetemplate.data.dao.ImageDao
+import com.hadiyarajesh.composetemplate.data.entity.Image
 
 @Database(
     version = 1,
-    entities = [Message::class],
+    entities = [Image::class],
     exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun messageDao(): MessageDao
+    abstract fun imageDao(): ImageDao
 }

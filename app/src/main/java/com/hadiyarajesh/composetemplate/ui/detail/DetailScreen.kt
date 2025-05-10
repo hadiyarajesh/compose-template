@@ -6,10 +6,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -20,10 +21,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.hadiyarajesh.composetemplate.R
 import com.hadiyarajesh.composetemplate.navigation.TopLevelDestination
+import com.hadiyarajesh.composetemplate.ui.components.IconPositionInText
+import com.hadiyarajesh.composetemplate.ui.components.TextWithIcon
 import com.hadiyarajesh.composetemplate.ui.components.VerticalSpacer
 
 @Composable
-fun DetailRoute(
+internal fun DetailRoute(
     source: String,
     onBackClick: () -> Unit
 ) {
@@ -52,7 +55,8 @@ private fun DetailScreen(
                 },
                 title = {
                     Text(
-                        text = stringResource(R.string.screen_name).format(
+                        text = stringResource(
+                            R.string.screen_name,
                             TopLevelDestination.Detail.title
                         )
                     )
@@ -85,10 +89,18 @@ private fun DetailScreenContent(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = stringResource(R.string.you_are_coming_from, source))
+        Text(
+            text = stringResource(R.string.you_are_coming_from, source),
+            style = MaterialTheme.typography.titleSmall
+        )
         VerticalSpacer(size = 16)
-        Button(onClick = { onBackClick() }) {
-            Text(text = stringResource(R.string.go_back))
+
+        OutlinedButton(onClick = { onBackClick() }) {
+            TextWithIcon(
+                text = stringResource(R.string.go_back),
+                icon = Icons.AutoMirrored.Filled.ArrowBack,
+                position = IconPositionInText.Leading
+            )
         }
     }
 }

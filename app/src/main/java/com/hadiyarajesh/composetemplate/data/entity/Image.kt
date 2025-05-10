@@ -4,8 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Message(
+data class Image(
     @PrimaryKey(autoGenerate = true)
-    val messageId: Long = 0,
-    val text: String
+    val imageId: Long = 0,
+    val description: String,
+    val altText: String,
+    val url: String
 )
