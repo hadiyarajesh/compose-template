@@ -5,7 +5,7 @@ import androidx.room.Room
 import com.hadiyarajesh.composetemplate.R
 import com.hadiyarajesh.composetemplate.data.AppDatabase
 import com.hadiyarajesh.composetemplate.data.RoomDbInitializer
-import com.hadiyarajesh.composetemplate.data.dao.MessageDao
+import com.hadiyarajesh.composetemplate.data.dao.ImageDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,7 +21,7 @@ class DatabaseModule {
     @Provides
     fun provideAppDatabase(
         @ApplicationContext context: Context,
-        messageDaoProvider: Provider<MessageDao>
+        imageDaoProvider: Provider<ImageDao>
     ): AppDatabase {
         return Room.databaseBuilder(
             context.applicationContext, AppDatabase::class.java, context.getString(
@@ -31,12 +31,12 @@ class DatabaseModule {
             /**
              * Attach [RoomDbInitializer] as callback to the database
              */
-            RoomDbInitializer(context = context, messageDaoProvider = messageDaoProvider)
+            RoomDbInitializer(context = context, imageDaoProvider = imageDaoProvider)
         )
             .build()
     }
 
     @Singleton
     @Provides
-    fun provideMessageDao(appDatabase: AppDatabase): MessageDao = appDatabase.messageDao()
+    fun provideMessageDao(appDatabase: AppDatabase): ImageDao = appDatabase.imageDao()
 }

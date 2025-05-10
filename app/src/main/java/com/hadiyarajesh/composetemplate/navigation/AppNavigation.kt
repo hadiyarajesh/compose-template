@@ -1,9 +1,6 @@
 package com.hadiyarajesh.composetemplate.navigation
 
 import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.EaseIn
-import androidx.compose.animation.core.EaseOut
-import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -11,6 +8,8 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.hadiyarajesh.composetemplate.ui.components.slideIntoContainerAnimation
+import com.hadiyarajesh.composetemplate.ui.components.slideOutOfContainerAnimation
 import com.hadiyarajesh.composetemplate.ui.detail.DetailRoute
 import com.hadiyarajesh.composetemplate.ui.home.HomeRoute
 import com.hadiyarajesh.composetemplate.utility.Constants
@@ -27,24 +26,8 @@ fun AppNavigation(
     ) {
         composable(
             route = TopLevelDestination.Home.route,
-            enterTransition = {
-                slideIntoContainer(
-                    animationSpec = tween(
-                        durationMillis = Constants.NAVIGATION_ANIMATION_DURATION,
-                        easing = EaseIn
-                    ),
-                    towards = AnimatedContentTransitionScope.SlideDirection.End
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    animationSpec = tween(
-                        durationMillis = Constants.NAVIGATION_ANIMATION_DURATION,
-                        easing = EaseOut
-                    ),
-                    towards = AnimatedContentTransitionScope.SlideDirection.Start
-                )
-            }
+            enterTransition = { slideIntoContainerAnimation() },
+            exitTransition = { slideOutOfContainerAnimation() }
         ) {
             HomeRoute(
                 onNavigateClick = { source ->
@@ -61,20 +44,12 @@ fun AppNavigation(
                 }
             ),
             enterTransition = {
-                slideIntoContainer(
-                    animationSpec = tween(
-                        durationMillis = Constants.NAVIGATION_ANIMATION_DURATION,
-                        easing = EaseIn
-                    ),
+                slideIntoContainerAnimation(
                     towards = AnimatedContentTransitionScope.SlideDirection.Start
                 )
             },
             exitTransition = {
-                slideOutOfContainer(
-                    animationSpec = tween(
-                        durationMillis = Constants.NAVIGATION_ANIMATION_DURATION,
-                        easing = EaseOut
-                    ),
+                slideOutOfContainerAnimation(
                     towards = AnimatedContentTransitionScope.SlideDirection.End
                 )
             }
