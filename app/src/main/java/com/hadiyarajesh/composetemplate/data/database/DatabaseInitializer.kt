@@ -1,12 +1,12 @@
-package com.hadiyarajesh.composetemplate.data
+package com.hadiyarajesh.composetemplate.data.database
 
 import android.content.Context
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.hadiyarajesh.composetemplate.R
-import com.hadiyarajesh.composetemplate.data.dao.ImageDao
-import com.hadiyarajesh.composetemplate.data.entity.Image
-import com.hadiyarajesh.composetemplate.utility.Constants
+import com.hadiyarajesh.composetemplate.data.database.dao.ImageDao
+import com.hadiyarajesh.composetemplate.data.database.entity.Image
+import com.hadiyarajesh.composetemplate.utility.ImageUtility
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -14,11 +14,16 @@ import kotlinx.coroutines.launch
 import javax.inject.Provider
 
 /**
- * This class implements [RoomDatabase.Callback] and override [RoomDatabase.Callback.onCreate] method
- * to initialise room database when it's created for the first time.
- * We're using [Provider] of [ImageDao] to break the circular dependency.
+ * A custom [RoomDatabase.Callback] used to initialize the Room database
+ * when it's created for the first time.
+ *
+ * This implementation overrides [RoomDatabase.Callback.onCreate] to pre-populate
+ * the database with initial data.
+ *
+ * A [Provider] of [ImageDao] is used to break the circular dependency between
+ * the database and its DAO.
  */
-class RoomDbInitializer(
+class DatabaseInitializer(
     private val context: Context,
     private val imageDaoProvider: Provider<ImageDao>
 ) : RoomDatabase.Callback() {
@@ -34,9 +39,9 @@ class RoomDbInitializer(
     private suspend fun populateDatabase() {
         imageDaoProvider.get().insertOrUpdateImage(
             Image(
+                url = ImageUtility.getRandomImageUrl(),
                 description = context.getString(R.string.welcome_message),
-                altText = context.getString(R.string.image),
-                url = Constants.IMAGE_URL
+                altText = context.getString(R.string.failed_to_load_image)
             )
         )
     }

@@ -13,9 +13,20 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
+/**
+ * Dagger-Hilt module that provides network-related dependencies.
+ *
+ * This module includes:
+ * - A singleton instance of [OkHttpClient] with conditional logging in debug builds.
+ * - A singleton instance of [Moshi] for JSON parsing.
+ * - A singleton instance of [Retrofit] configured with [OkHttpClient] and [Moshi].
+ *
+ * Annotated with [@InstallIn(SingletonComponent::class)] to ensure the
+ * provided instances live as long as the application.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
+object NetworkModule {
     private fun getLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY

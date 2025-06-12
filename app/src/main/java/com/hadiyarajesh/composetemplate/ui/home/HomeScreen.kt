@@ -1,15 +1,12 @@
 package com.hadiyarajesh.composetemplate.ui.home
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -22,60 +19,62 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import coil3.compose.SubcomposeAsyncImage
+import androidx.navigation.NavController
 import com.hadiyarajesh.composetemplate.R
-import com.hadiyarajesh.composetemplate.data.entity.Image
-import com.hadiyarajesh.composetemplate.navigation.TopLevelDestination
+import com.hadiyarajesh.composetemplate.data.database.entity.Image
+import com.hadiyarajesh.composetemplate.navigation.NavDestination
 import com.hadiyarajesh.composetemplate.ui.components.ErrorItem
+import com.hadiyarajesh.composetemplate.ui.components.ImageBox
 import com.hadiyarajesh.composetemplate.ui.components.LoadingIndicator
 import com.hadiyarajesh.composetemplate.ui.components.TextWithIcon
 import com.hadiyarajesh.composetemplate.ui.components.VerticalSpacer
-import com.hadiyarajesh.composetemplate.utility.Constants
+import com.hadiyarajesh.composetemplate.utility.ImageUtility
 
 /**
- * This composable function is used to be called from [com.hadiyarajesh.composetemplate.navigation.AppNavigation].
+ * Entry-point composable for the Home screen, intended to be invoked from
+ * [com.hadiyarajesh.composetemplate.navigation.AppNavigation].
+ *
+ * It handles navigation and business logic by interacting with the ViewModel,
+ * and delegates the actual UI rendering to [HomeScreenContent], making it easier
+ * to separate concerns and enable previewing of the UI independently.
  */
 @Composable
-internal fun HomeRoute(
-    onNavigateClick: (source: String) -> Unit,
+internal fun HomeScreenRoute(
+    navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val context = LocalContext.current
     val homeScreenUiState by remember { viewModel.uiState }.collectAsStateWithLifecycle()
 
-    HomeScreen(
+    HomeScreenContent(
         uiState = homeScreenUiState,
         loadData = { viewModel.loadData() },
-        onNavigateClick = {
-            onNavigateClick(
-                context.getString(
-                    R.string.screen_name,
-                    TopLevelDestination.Home.title
-                )
-            )
+        onNavigateClick = { image -> navController.navigate(NavDestination.Detail(image)) },
+        onChangeImageClick = { image ->
+            viewModel.changeImage(image)
         }
     )
 }
 
 /**
- * This composable function is used to display the content of home screen that is preview-able,
- * which means it does not take any dependency that would be difficult to provide from compose preview.
+ * Stateless, preview-friendly composable that renders the Home screen UI.
+ *
+ * It does not require any ViewModel or navigation controller, making it
+ * suitable for @Preview usage and reusable in different contexts. All actions
+ * and data are passed in via parameters to promote testability and separation
+ * of concerns.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun HomeScreen(
+private fun HomeScreenContent(
     uiState: HomeScreenUiState,
     loadData: () -> Unit,
-    onNavigateClick: () -> Unit
+    onNavigateClick: (Image) -> Unit,
+    onChangeImageClick: (Image) -> Unit
 ) {
     LaunchedEffect(Unit) {
         loadData()
@@ -101,10 +100,11 @@ private fun HomeScreen(
                 }
 
                 is HomeScreenUiState.Success -> {
-                    HomeScreenContent(
+                    ImageAndButtonView(
                         modifier = Modifier.fillMaxSize(),
                         image = uiState.data,
-                        onNavigateClick = onNavigateClick
+                        onNavigateClick = onNavigateClick,
+                        onChangeImageClick = onChangeImageClick
                     )
                 }
 
@@ -122,49 +122,44 @@ private fun HomeScreen(
 }
 
 @Composable
-private fun HomeScreenContent(
+private fun ImageAndButtonView(
     modifier: Modifier = Modifier,
     image: Image,
-    onNavigateClick: () -> Unit
+    onNavigateClick: (Image) -> Unit,
+    onChangeImageClick: (Image) -> Unit
 ) {
-    val imageShape = RoundedCornerShape(16.dp)
-
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            modifier = Modifier
-                .size(300.dp)
-                .clip(imageShape)
-                .border(1.dp, Color.LightGray, imageShape)
-                .shadow(5.dp, imageShape)
-        ) {
-            SubcomposeAsyncImage(
-                modifier = Modifier.fillMaxSize(),
-                model = image.url,
-                contentDescription = image.description,
-                loading = { LoadingIndicator(strokeWidth = 2.dp) },
-                error = { ErrorItem(text = image.altText) }
-            )
-        }
+        ImageBox(image = image)
+
         VerticalSpacer(size = 16)
 
         Text(
             text = image.description,
             style = MaterialTheme.typography.titleSmall
         )
+
         VerticalSpacer(size = 16)
 
-        OutlinedButton(onClick = onNavigateClick) {
+        OutlinedButton(onClick = { onChangeImageClick(image) }) {
+            TextWithIcon(
+                text = stringResource(R.string.change_image),
+                icon = Icons.Default.Refresh
+            )
+        }
+
+        VerticalSpacer(size = 8)
+
+        OutlinedButton(onClick = { onNavigateClick(image) }) {
             TextWithIcon(
                 text = stringResource(
                     R.string.go_to_screen,
-                    TopLevelDestination.Detail.title
+                    stringResource(id = R.string.detail)
                 ),
-                icon = Icons.AutoMirrored.Filled.ArrowForward
-
+                icon = Icons.AutoMirrored.Default.ArrowForward
             )
         }
     }
@@ -172,16 +167,17 @@ private fun HomeScreenContent(
 
 @Preview(showSystemUi = true)
 @Composable
-fun HomeScreenPreview() {
-    HomeScreen(
+private fun HomeScreenPreview() {
+    HomeScreenContent(
         uiState = HomeScreenUiState.Success(
             data = Image(
                 description = stringResource(id = R.string.welcome_message),
-                altText = stringResource(id = R.string.image),
-                url = Constants.IMAGE_URL
+                altText = stringResource(id = R.string.failed_to_load_image),
+                url = ImageUtility.getRandomImageUrl()
             )
         ),
         loadData = {},
-        onNavigateClick = {}
+        onNavigateClick = {},
+        onChangeImageClick = {}
     )
 }

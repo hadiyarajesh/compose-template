@@ -1,18 +1,20 @@
 package com.hadiyarajesh.composetemplate.navigation
 
-import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
+import com.hadiyarajesh.composetemplate.data.database.entity.Image
+import com.hadiyarajesh.composetemplate.ui.components.reverseSlideIntoContainerAnimation
+import com.hadiyarajesh.composetemplate.ui.components.reverseSlideOutOfContainerAnimation
 import com.hadiyarajesh.composetemplate.ui.components.slideIntoContainerAnimation
 import com.hadiyarajesh.composetemplate.ui.components.slideOutOfContainerAnimation
-import com.hadiyarajesh.composetemplate.ui.detail.DetailRoute
-import com.hadiyarajesh.composetemplate.ui.home.HomeRoute
-import com.hadiyarajesh.composetemplate.utility.Constants
+import com.hadiyarajesh.composetemplate.ui.detail.DetailScreenRoute
+import com.hadiyarajesh.composetemplate.ui.home.HomeScreenRoute
+import com.hadiyarajesh.composetemplate.utility.parcelableType
+import kotlin.reflect.typeOf
 
 @Composable
 fun AppNavigation(
@@ -22,43 +24,25 @@ fun AppNavigation(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = TopLevelDestination.Home.route
+        startDestination = NavDestination.Home
     ) {
-        composable(
-            route = TopLevelDestination.Home.route,
+        composable<NavDestination.Home>(
             enterTransition = { slideIntoContainerAnimation() },
             exitTransition = { slideOutOfContainerAnimation() }
         ) {
-            HomeRoute(
-                onNavigateClick = { source ->
-                    navController.navigate(TopLevelDestination.Detail.withArgs(source))
-                }
-            )
+            HomeScreenRoute(navController = navController)
         }
 
-        composable(
-            route = TopLevelDestination.Detail.route + "/{${Constants.SOURCE}}",
-            arguments = listOf(
-                navArgument(Constants.SOURCE) {
-                    type = NavType.StringType
-                }
-            ),
-            enterTransition = {
-                slideIntoContainerAnimation(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Start
-                )
-            },
-            exitTransition = {
-                slideOutOfContainerAnimation(
-                    towards = AnimatedContentTransitionScope.SlideDirection.End
-                )
-            }
+        composable<NavDestination.Detail>(
+            typeMap = mapOf(typeOf<Image>() to parcelableType<Image>()),
+            enterTransition = { reverseSlideIntoContainerAnimation() },
+            exitTransition = { reverseSlideOutOfContainerAnimation() }
         ) { backStackEntry ->
-            val source = backStackEntry.arguments?.getString(Constants.SOURCE) ?: return@composable
+            val detail = backStackEntry.toRoute<NavDestination.Detail>()
 
-            DetailRoute(
-                source = source,
-                onBackClick = { navController.popBackStack() }
+            DetailScreenRoute(
+                navController = navController,
+                image = detail.image
             )
         }
     }
