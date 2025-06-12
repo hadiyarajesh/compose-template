@@ -3,9 +3,9 @@ package com.hadiyarajesh.composetemplate.di
 import android.content.Context
 import androidx.room.Room
 import com.hadiyarajesh.composetemplate.R
-import com.hadiyarajesh.composetemplate.data.AppDatabase
-import com.hadiyarajesh.composetemplate.data.RoomDbInitializer
-import com.hadiyarajesh.composetemplate.data.dao.ImageDao
+import com.hadiyarajesh.composetemplate.data.database.AppDatabase
+import com.hadiyarajesh.composetemplate.data.database.DatabaseInitializer
+import com.hadiyarajesh.composetemplate.data.database.dao.ImageDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,9 +14,19 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Provider
 import javax.inject.Singleton
 
+/**
+ * Dagger-Hilt module that provides dependencies related to the Room database.
+ *
+ * This module includes:
+ * - A singleton instance of [AppDatabase]
+ * - A singleton instance of [ImageDao], retrieved from the database.
+ *
+ * Annotated with [@InstallIn(SingletonComponent::class)] to ensure the
+ * provided instances live as long as the application.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
-class DatabaseModule {
+object DatabaseModule {
     @Singleton
     @Provides
     fun provideAppDatabase(
@@ -29,9 +39,9 @@ class DatabaseModule {
             )
         ).addCallback(
             /**
-             * Attach [RoomDbInitializer] as callback to the database
+             * Attach [DatabaseInitializer] as callback to the database
              */
-            RoomDbInitializer(context = context, imageDaoProvider = imageDaoProvider)
+            DatabaseInitializer(context = context, imageDaoProvider = imageDaoProvider)
         )
             .build()
     }

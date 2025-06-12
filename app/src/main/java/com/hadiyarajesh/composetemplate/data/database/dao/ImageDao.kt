@@ -1,9 +1,9 @@
-package com.hadiyarajesh.composetemplate.data.dao
+package com.hadiyarajesh.composetemplate.data.database.dao
 
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
-import com.hadiyarajesh.composetemplate.data.entity.Image
+import com.hadiyarajesh.composetemplate.data.database.entity.Image
 import kotlinx.coroutines.flow.Flow
 
 @Dao

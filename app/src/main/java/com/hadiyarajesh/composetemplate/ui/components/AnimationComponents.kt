@@ -6,26 +6,31 @@ import androidx.compose.animation.core.EaseIn
 import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.tween
 import androidx.navigation.NavBackStackEntry
-import com.hadiyarajesh.composetemplate.utility.Constants
+
+const val NAVIGATION_ANIMATION_DURATION = 200
 
 fun AnimatedContentTransitionScope<NavBackStackEntry>.slideIntoContainerAnimation(
     towards: SlideDirection = SlideDirection.End
-) =
-    slideIntoContainer(
-        animationSpec = tween(
-            durationMillis = Constants.NAVIGATION_ANIMATION_DURATION,
-            easing = EaseIn
-        ),
-        towards = towards
-    )
+) = slideIntoContainer(
+    animationSpec = tween(
+        durationMillis = NAVIGATION_ANIMATION_DURATION,
+        easing = EaseIn
+    ),
+    towards = towards
+)
 
 fun AnimatedContentTransitionScope<NavBackStackEntry>.slideOutOfContainerAnimation(
     towards: SlideDirection = SlideDirection.Start
-) =
-    slideOutOfContainer(
-        animationSpec = tween(
-            durationMillis = Constants.NAVIGATION_ANIMATION_DURATION,
-            easing = EaseOut
-        ),
-        towards = towards
-    )
+) = slideOutOfContainer(
+    animationSpec = tween(
+        durationMillis = NAVIGATION_ANIMATION_DURATION,
+        easing = EaseOut
+    ),
+    towards = towards
+)
+
+fun AnimatedContentTransitionScope<NavBackStackEntry>.reverseSlideIntoContainerAnimation() =
+    slideIntoContainerAnimation(towards = SlideDirection.Start)
+
+fun AnimatedContentTransitionScope<NavBackStackEntry>.reverseSlideOutOfContainerAnimation() =
+    slideOutOfContainerAnimation(towards = SlideDirection.End)

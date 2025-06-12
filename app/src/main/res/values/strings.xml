@@ -2,8 +2,14 @@
     <string name="app_name">Compose Template</string>
     <string name="welcome_message">Welcome to Compose Template</string>
     <string name="go_back">Go back</string>
+    <string name="home">Home</string>
+    <string name="detail">Detail</string>
     <string name="screen_name">%1$s Screen</string>
     <string name="you_are_coming_from">You are coming from: %1$s</string>
     <string name="go_to_screen">Go to %1$s Screen</string>
-    <string name="image">Image</string>
+    <string name="change_image">Change Image</string>
+    <string name="description">Description</string>
+    <string name="url">URL</string>
+    <string name="failed_to_load_image">Failed to load image</string>
+    <string name="failed_to_open_url">Failed to open URL</string>
 </resources>
