@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -11,12 +13,12 @@ plugins {
 
 android {
     namespace = "com.hadiyarajesh.composetemplate"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.hadiyarajesh.composetemplate"
         minSdk = 21
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -40,16 +42,22 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
-    kotlinOptions {
-        jvmTarget = "21"
-    }
+
     buildFeatures {
         compose = true
     }
+
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_21
+        }
+    }
+
     room {
         schemaDirectory("$projectDir/schemas")
     }
@@ -80,10 +88,20 @@ dependencies {
 
     implementation(libs.bundles.coil)
 
-    testImplementation(libs.junit)
+    testImplementation(platform(libs.junit5.bom))
+    testImplementation(libs.junit5)
+    testRuntimeOnly(libs.junit5.platform.launcher)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.turbine)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
     debugImplementation(libs.bundles.compose.ui.debug)
+}
+
+tasks.withType<Test>().configureEach {
+    // Use the JUnit Platform for running tests, which enables support for JUnit 5 (Jupiter)
+    useJUnitPlatform()
 }
