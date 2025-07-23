@@ -1,16 +1,15 @@
-# Builds the app and runs unit tests on pull requests.
+# Builds the app and runs unit tests on pushes to the master branch
 name: Build and test
 
 on:
-  pull_request:
+  push:
     branches: [ "master" ]
-    types: [ "opened", "reopened", "synchronize", "ready_for_review" ]
 
 jobs:
   build:
     # Run this job only if the pull request is not a draft
     if: github.event.pull_request.draft == false
-    name: Build app and execute unit tests on PR
+    name: Build app and execute unit tests on Push
     runs-on: ubuntu-latest
 
     steps:
