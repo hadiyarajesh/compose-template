@@ -5,7 +5,7 @@
 
 ### Checklist
 
-- [] I have run the code locally and it's working well
-- [] I have performed a self-review of my code
-- [] I have added thorough tests (if applicable)
-- [] I have added all screenshots (if applicable)
+- [ ] I have run the code locally and it's working well
+- [ ] I have performed a self-review of my code
+- [ ] I have added thorough tests (if applicable)
+- [ ] I have added all screenshots (if applicable)
