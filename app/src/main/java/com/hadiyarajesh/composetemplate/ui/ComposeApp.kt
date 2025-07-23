@@ -1,4 +1,4 @@
-package com.hadiyarajesh.composetemplate
+package com.hadiyarajesh.composetemplate.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -9,7 +9,7 @@ import com.hadiyarajesh.composetemplate.navigation.AppNavigation
 import com.hadiyarajesh.composetemplate.ui.theme.AppTheme
 
 @Composable
-fun App() {
+fun ComposeApp() {
     AppTheme {
         val navController = rememberNavController()
 

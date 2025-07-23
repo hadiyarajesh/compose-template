@@ -32,10 +32,10 @@ internal class HomeViewModel @Inject constructor(
                 homeRepository
                     .loadData()
                     .collect { image: Image? ->
-                    image?.let { msg ->
-                        _uiState.value = HomeScreenUiState.Success(data = msg)
+                        image?.let { msg ->
+                            _uiState.value = HomeScreenUiState.Success(data = msg)
+                        }
                     }
-                }
             } catch (e: Exception) {
                 _uiState.value = HomeScreenUiState.Error(msg = e.message ?: "Something went wrong")
             }
