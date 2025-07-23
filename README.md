@@ -14,6 +14,22 @@ It includes the following popular libraries:
 To use this template, simply click on the **Use this template** button at the top (or fork the repository) and start building your app on top of it. 
 Make sure to update the package name and other app-specific details before building and deploying your app.
 
+## CI/CD
+
+This project includes built-in support for [GitHub Actions](https://github.com/features/actions) to
+automate builds, run unit tests, and ensure code quality.
+CI/CD workflows can be found in the `.github/workflows/` directory and can be customized based on
+your needs.
+
+## Unit Testing
+
+This project supports unit testing with the following features:
+
+- Kotlin and Android unit tests with JUnit5
+- Coroutine and Flow testing utilities
+- `StateFlow` testing support via the [Turbine](https://github.com/cashapp/turbine) library, for
+  testing UI state streams in a reactive manner.
+
 ## Annotation Processing
 This project uses [Kotlin Symbol Processing (KSP)](https://kotlinlang.org/docs/ksp-overview.html) for annotation processing, which provides faster build times compared to [KAPT](https://kotlinlang.org/docs/kapt.html).
 
