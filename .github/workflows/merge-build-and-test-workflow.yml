@@ -1,4 +1,4 @@
-# Builds the app and runs unit tests on pushes to the master branch
+# Builds the app and runs unit tests on push
 name: Build and test
 
 on:
