@@ -1,12 +1,13 @@
 package com.hadiyarajesh.composetemplate.ui.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.buildAnnotatedString
@@ -21,14 +22,14 @@ import androidx.compose.ui.unit.sp
  *
  * @param modifier Modifier to be applied to the icon.
  * @param text The text to display alongside the icon.
- * @param icon The [ImageVector] representing the icon to show.
+ * @param icon The [Int] representing the icon Drawable to show.
  * @param position Controls whether the icon appears before or after the text.
  */
 @Composable
 internal fun TextWithIcon(
     modifier: Modifier = Modifier,
     text: String,
-    icon: ImageVector,
+    @DrawableRes icon: Int,
     position: IconPositionInText = IconPositionInText.Trailing
 ) {
     val iconId = "arrow_icon"
@@ -59,7 +60,7 @@ internal fun TextWithIcon(
         ) {
             Icon(
                 modifier = modifier,
-                imageVector = icon,
+                painter = painterResource(icon),
                 contentDescription = iconId
             )
         }
