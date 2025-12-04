@@ -6,6 +6,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.Placeholder
 import androidx.compose.ui.text.PlaceholderVerticalAlign
@@ -28,7 +29,7 @@ import androidx.compose.ui.unit.sp
 internal fun TextWithIcon(
     modifier: Modifier = Modifier,
     text: String,
-    icon: ImageVector,
+    icon: Painter,
     position: IconPositionInText = IconPositionInText.Trailing
 ) {
     val iconId = "arrow_icon"
@@ -59,7 +60,7 @@ internal fun TextWithIcon(
         ) {
             Icon(
                 modifier = modifier,
-                imageVector = icon,
+                painter = icon,
                 contentDescription = iconId
             )
         }

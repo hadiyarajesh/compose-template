@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -24,9 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.LinkAnnotation
-import androidx.compose.ui.text.LinkInteractionListener
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
@@ -100,7 +98,7 @@ internal fun TopBarWithBackButton(
         navigationIcon = {
             IconButton(onClick = onBackClick) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    painter = painterResource(R.drawable.ic_arrow_back),
                     contentDescription = stringResource(R.string.go_back)
                 )
             }
@@ -151,14 +149,8 @@ internal fun ClickableUrlText(
                         color = Color.Blue,
                         textDecoration = TextDecoration.Underline
                     )
-                ),
-                object : LinkInteractionListener {
-                    override fun onClick(link: LinkAnnotation) {
-                        onClick(url)
-                    }
-
-                }
-            )
+                )
+            ) { onClick(url) }
         ) {
             append(url)
         }

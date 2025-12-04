@@ -101,7 +101,7 @@ dependencies {
     debugImplementation(libs.bundles.compose.ui.debug)
 }
 
+// Use the JUnit5 Platform for running tests
 tasks.withType<Test>().configureEach {
-    // Use the JUnit Platform for running tests, which enables support for JUnit 5 (Jupiter)
     useJUnitPlatform()
 }

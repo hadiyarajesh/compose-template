@@ -4,9 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -19,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -147,7 +145,7 @@ private fun ImageAndButtonView(
         OutlinedButton(onClick = { onChangeImageClick(image) }) {
             TextWithIcon(
                 text = stringResource(R.string.change_image),
-                icon = Icons.Default.Refresh
+                icon = painterResource(R.drawable.ic_refresh)
             )
         }
 
@@ -159,7 +157,7 @@ private fun ImageAndButtonView(
                     R.string.go_to_screen,
                     stringResource(id = R.string.detail)
                 ),
-                icon = Icons.AutoMirrored.Default.ArrowForward
+                icon = painterResource(R.drawable.ic_arrow_forward)
             )
         }
     }
