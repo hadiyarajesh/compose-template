@@ -42,13 +42,15 @@ import com.hadiyarajesh.composetemplate.data.database.entity.Image
  * Create a [Spacer] of given width in [dp]
  */
 @Composable
-internal fun RowScope.HorizontalSpacer(size: Int) = Spacer(modifier = Modifier.width(size.dp))
+internal fun RowScope.HorizontalSpacer(size: Int) =
+    Spacer(modifier = Modifier.width(size.dp))
 
 /**
  * Create a [Spacer] of given height in [dp]
  */
 @Composable
-internal fun ColumnScope.VerticalSpacer(size: Int) = Spacer(modifier = Modifier.height(size.dp))
+internal fun ColumnScope.VerticalSpacer(size: Int) =
+    Spacer(modifier = Modifier.height(size.dp))
 
 /**
  * Create a center aligned [CircularProgressIndicator] wrapped in a [Box]
