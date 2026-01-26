@@ -19,7 +19,7 @@ import kotlin.reflect.typeOf
 @Composable
 fun AppNavigation(
     modifier: Modifier = Modifier,
-    navController: NavHostController,
+    navController: NavHostController
 ) {
     NavHost(
         modifier = modifier,
