@@ -12,7 +12,7 @@ plugins {
 
 android {
     namespace = "com.hadiyarajesh.composetemplate"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.hadiyarajesh.composetemplate"
@@ -58,6 +58,14 @@ android {
 
     room {
         schemaDirectory("$projectDir/schemas")
+    }
+}
+
+// Hilt bundles an outdated kotlin-metadata-jvm version.
+// Force a version compatible with the current Kotlin release.
+configurations.configureEach {
+    resolutionStrategy {
+        force(libs.kotlin.metadata.jvm)
     }
 }
 
