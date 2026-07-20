@@ -17,10 +17,7 @@ import com.hadiyarajesh.composetemplate.utility.parcelableType
 import kotlin.reflect.typeOf
 
 @Composable
-fun AppNavigation(
-    modifier: Modifier = Modifier,
-    navController: NavHostController
-) {
+fun AppNavigation(modifier: Modifier = Modifier, navController: NavHostController) {
     NavHost(
         modifier = modifier,
         navController = navController,

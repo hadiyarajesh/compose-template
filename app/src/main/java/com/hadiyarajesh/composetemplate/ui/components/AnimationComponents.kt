@@ -11,28 +11,24 @@ typealias AnimatedBackStackEntry = AnimatedContentTransitionScope<NavBackStackEn
 
 const val NAVIGATION_ANIMATION_DURATION = 200
 
-fun AnimatedBackStackEntry.slideIntoContainerAnimation(
-    towards: SlideDirection = SlideDirection.End
-) = slideIntoContainer(
-    animationSpec = tween(
+fun AnimatedBackStackEntry.slideIntoContainerAnimation(towards: SlideDirection = SlideDirection.End) = slideIntoContainer(
+    animationSpec =
+    tween(
         durationMillis = NAVIGATION_ANIMATION_DURATION,
         easing = EaseIn
     ),
     towards = towards
 )
 
-fun AnimatedBackStackEntry.slideOutOfContainerAnimation(
-    towards: SlideDirection = SlideDirection.Start
-) = slideOutOfContainer(
-    animationSpec = tween(
+fun AnimatedBackStackEntry.slideOutOfContainerAnimation(towards: SlideDirection = SlideDirection.Start) = slideOutOfContainer(
+    animationSpec =
+    tween(
         durationMillis = NAVIGATION_ANIMATION_DURATION,
         easing = EaseOut
     ),
     towards = towards
 )
 
-fun AnimatedBackStackEntry.reverseSlideIntoContainerAnimation() =
-    slideIntoContainerAnimation(towards = SlideDirection.Start)
+fun AnimatedBackStackEntry.reverseSlideIntoContainerAnimation() = slideIntoContainerAnimation(towards = SlideDirection.Start)
 
-fun AnimatedBackStackEntry.reverseSlideOutOfContainerAnimation() =
-    slideOutOfContainerAnimation(towards = SlideDirection.End)
+fun AnimatedBackStackEntry.reverseSlideOutOfContainerAnimation() = slideOutOfContainerAnimation(towards = SlideDirection.End)

@@ -13,7 +13,6 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -42,11 +41,8 @@ import com.hadiyarajesh.composetemplate.utility.ImageUtility
  * to separate concerns and enable previewing of the UI independently.
  */
 @Composable
-internal fun HomeScreenRoute(
-    navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel()
-) {
-    val homeScreenUiState by remember { viewModel.uiState }.collectAsStateWithLifecycle()
+internal fun HomeScreenRoute(navController: NavController, viewModel: HomeViewModel = hiltViewModel()) {
+    val homeScreenUiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     HomeScreenContent(
         uiState = homeScreenUiState,
@@ -168,7 +164,8 @@ private fun ImageAndButtonView(
 private fun HomeScreenPreview() {
     HomeScreenContent(
         uiState = HomeScreenUiState.Success(
-            data = Image(
+            data =
+            Image(
                 description = stringResource(id = R.string.welcome_message),
                 altText = stringResource(id = R.string.failed_to_load_image),
                 url = ImageUtility.getRandomImageUrl()

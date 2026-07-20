@@ -15,7 +15,5 @@ object ImageUtility {
     private val randomImageId: Int
         get() = Random.nextInt(1, 201)
 
-    fun getRandomImageUrl(): String {
-        return "https://picsum.photos/id/${randomImageId}/${IMAGE_WIDTH}/${IMAGE_HEIGHT}"
-    }
+    fun getRandomImageUrl(): String = "https://picsum.photos/id/$randomImageId/${IMAGE_WIDTH}/${IMAGE_HEIGHT}"
 }

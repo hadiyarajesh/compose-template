@@ -38,10 +38,7 @@ import com.hadiyarajesh.composetemplate.utility.ImageUtility
  * to separate concerns and enable previewing of the UI independently.
  */
 @Composable
-internal fun DetailScreenRoute(
-    navController: NavController,
-    image: Image
-) {
+internal fun DetailScreenRoute(navController: NavController, image: Image) {
     DetailScreenContent(
         image = image,
         onBackClick = { navController.popBackStack() }
@@ -57,17 +54,15 @@ internal fun DetailScreenRoute(
  * of concerns.
  */
 @Composable
-private fun DetailScreenContent(
-    image: Image,
-    onBackClick: () -> Unit
-) {
+private fun DetailScreenContent(image: Image, onBackClick: () -> Unit) {
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
 
     Scaffold(
         topBar = {
             TopBarWithBackButton(
-                title = stringResource(
+                title =
+                stringResource(
                     R.string.screen_name,
                     stringResource(R.string.detail)
                 ),
@@ -76,7 +71,8 @@ private fun DetailScreenContent(
         }
     ) { innerPadding ->
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
             verticalArrangement = Arrangement.Center,
@@ -89,11 +85,12 @@ private fun DetailScreenContent(
                     try {
                         uriHandler.openUri(url)
                     } catch (e: IllegalArgumentException) {
-                        Toast.makeText(
-                            context,
-                            context.getString(R.string.failed_to_open_url),
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast
+                            .makeText(
+                                context,
+                                context.getString(R.string.failed_to_open_url),
+                                Toast.LENGTH_SHORT
+                            ).show()
                         e.printStackTrace()
                     }
                 }
@@ -103,11 +100,7 @@ private fun DetailScreenContent(
 }
 
 @Composable
-private fun ImageDetailView(
-    modifier: Modifier = Modifier,
-    image: Image,
-    onImageUrlClick: (String) -> Unit
-) {
+private fun ImageDetailView(modifier: Modifier = Modifier, image: Image, onImageUrlClick: (String) -> Unit) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -118,7 +111,8 @@ private fun ImageDetailView(
         VerticalSpacer(size = 24)
 
         Text(
-            text = buildAnnotatedString {
+            text =
+            buildAnnotatedString {
                 withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
                     append("${stringResource(R.string.description)}: ")
                 }
@@ -140,7 +134,8 @@ private fun ImageDetailView(
 @Composable
 fun DetailScreenPreview() {
     DetailScreenContent(
-        image = Image(
+        image =
+        Image(
             url = ImageUtility.getRandomImageUrl(),
             description = stringResource(id = R.string.welcome_message),
             altText = stringResource(id = R.string.failed_to_load_image)

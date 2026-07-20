@@ -1,5 +1,6 @@
 package com.hadiyarajesh.composetemplate.utility
 
 object Constants {
-    const val API_BASE_URL = "API_BASE_URL"
+    // Placeholder base URL. Replace with your API's URL (must end with '/').
+    const val API_BASE_URL = "https://api.example.com/"
 }

@@ -42,15 +42,13 @@ import com.hadiyarajesh.composetemplate.data.database.entity.Image
  * Create a [Spacer] of given width in [dp]
  */
 @Composable
-internal fun RowScope.HorizontalSpacer(size: Int) =
-    Spacer(modifier = Modifier.width(size.dp))
+internal fun RowScope.HorizontalSpacer(size: Int) = Spacer(modifier = Modifier.width(size.dp))
 
 /**
  * Create a [Spacer] of given height in [dp]
  */
 @Composable
-internal fun ColumnScope.VerticalSpacer(size: Int) =
-    Spacer(modifier = Modifier.height(size.dp))
+internal fun ColumnScope.VerticalSpacer(size: Int) = Spacer(modifier = Modifier.height(size.dp))
 
 /**
  * Create a center aligned [CircularProgressIndicator] wrapped in a [Box]
@@ -74,11 +72,7 @@ internal fun LoadingIndicator(
 }
 
 @Composable
-internal fun ErrorItem(
-    text: String,
-    modifier: Modifier = Modifier,
-    color: Color = MaterialTheme.colorScheme.error
-) {
+internal fun ErrorItem(text: String, modifier: Modifier = Modifier, color: Color = MaterialTheme.colorScheme.error) {
     Box(modifier = modifier) {
         Text(
             modifier = Modifier.align(Alignment.Center),
@@ -90,11 +84,7 @@ internal fun ErrorItem(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun TopBarWithBackButton(
-    modifier: Modifier = Modifier,
-    title: String,
-    onBackClick: () -> Unit
-) {
+internal fun TopBarWithBackButton(modifier: Modifier = Modifier, title: String, onBackClick: () -> Unit) {
     TopAppBar(
         modifier = modifier,
         navigationIcon = {
@@ -110,10 +100,7 @@ internal fun TopBarWithBackButton(
 }
 
 @Composable
-internal fun ImageBox(
-    modifier: Modifier = Modifier,
-    image: Image
-) {
+internal fun ImageBox(modifier: Modifier = Modifier, image: Image) {
     val imageShape = RoundedCornerShape(16.dp)
 
     Box(
@@ -133,30 +120,27 @@ internal fun ImageBox(
 }
 
 @Composable
-internal fun ClickableUrlText(
-    modifier: Modifier = Modifier,
-    url: String,
-    onClick: (String) -> Unit
-) {
-    val annotatedString = buildAnnotatedString {
-        withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
-            append("${stringResource(R.string.url)}: ")
-        }
+internal fun ClickableUrlText(modifier: Modifier = Modifier, url: String, onClick: (String) -> Unit) {
+    val annotatedString =
+        buildAnnotatedString {
+            withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                append("${stringResource(R.string.url)}: ")
+            }
 
-        withLink(
-            LinkAnnotation.Url(
-                url,
-                TextLinkStyles(
-                    style = SpanStyle(
-                        color = Color.Blue,
-                        textDecoration = TextDecoration.Underline
+            withLink(
+                LinkAnnotation.Url(
+                    url,
+                    TextLinkStyles(
+                        style = SpanStyle(
+                            color = Color.Blue,
+                            textDecoration = TextDecoration.Underline
+                        )
                     )
-                )
-            ) { onClick(url) }
-        ) {
-            append(url)
+                ) { onClick(url) }
+            ) {
+                append(url)
+            }
         }
-    }
 
     Text(
         modifier = modifier,

@@ -7,11 +7,11 @@ It includes the following popular libraries:
 - [Hilt](https://dagger.dev/hilt) - Hilt is a dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
 - [Room](https://developer.android.com/training/data-storage/room) - Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
 - [Retrofit](https://github.com/square/retrofit) - A type-safe HTTP client for Android and the JVM.
-- [Moshi](https://github.com/square/moshi) - A modern JSON library for Kotlin and Java.
+- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) - Kotlin multiplatform JSON serialization, used both for Retrofit responses (via Retrofit's first-party converter) and type-safe navigation arguments.
 - [Coil](https://github.com/coil-kt/coil) - Image loading for Android backed by Kotlin Coroutines.
 
 ## How to use
-To use this template, simply click on the **Use this template** button at the top (or fork the repository) and start building your app on top of it. 
+To use this template, simply click on the **Use this template** button at the top (or fork the repository) and start building your app on top of it.
 Make sure to update the package name and other app-specific details before building and deploying your app.
 
 ## CI/CD
@@ -19,7 +19,26 @@ Make sure to update the package name and other app-specific details before build
 This project includes built-in support for [GitHub Actions](https://github.com/features/actions) to
 automate builds, run unit tests, and ensure code quality.
 CI/CD workflows can be found in the `.github/workflows/` directory and can be customized based on
-your needs.
+your needs. Each run also verifies formatting via `./gradlew spotlessCheck`.
+
+Dependencies and GitHub Actions are kept up to date automatically via
+[Dependabot](https://docs.github.com/code-security/dependabot) (`.github/dependabot.yml`).
+
+## Code Style
+
+Kotlin sources are formatted and linted with [Spotless](https://github.com/diffplug/spotless)
+(backed by [ktlint](https://github.com/pinterest/ktlint)). Shared rules live in `.editorconfig`.
+
+- Auto-format: `./gradlew spotlessApply`
+- Verify (also run in CI): `./gradlew spotlessCheck`
+
+## Screenshot Testing
+
+UI components are covered by [Compose Preview screenshot tests](https://developer.android.com/studio/preview/compose-screenshot-testing).
+Any `@Preview` under `app/src/screenshotTest/` is rendered to a reference image.
+
+- Generate/refresh reference images: `./gradlew updateDebugScreenshotTest`
+- Verify against references: `./gradlew validateDebugScreenshotTest`
 
 ## Unit Testing
 

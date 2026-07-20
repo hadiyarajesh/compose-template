@@ -68,7 +68,5 @@ internal class HomeViewModelTest {
         }
     }
 
-    private fun newViewModel(): HomeViewModel {
-        return HomeViewModel(homeRepository)
-    }
+    private fun newViewModel(): HomeViewModel = HomeViewModel(homeRepository)
 }

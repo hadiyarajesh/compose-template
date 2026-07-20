@@ -29,22 +29,17 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Singleton
     @Provides
-    fun provideAppDatabase(
-        @ApplicationContext context: Context,
-        imageDaoProvider: Provider<ImageDao>
-    ): AppDatabase {
-        return Room.databaseBuilder(
-            context.applicationContext, AppDatabase::class.java, context.getString(
+    fun provideAppDatabase(@ApplicationContext context: Context, imageDaoProvider: Provider<ImageDao>): AppDatabase = Room
+        .databaseBuilder(
+            context.applicationContext,
+            AppDatabase::class.java,
+            context.getString(
                 R.string.app_name
             )
         ).addCallback(
-            /**
-             * Attach [DatabaseInitializer] as callback to the database
-             */
+            // Attach DatabaseInitializer as a callback to the database.
             DatabaseInitializer(context = context, imageDaoProvider = imageDaoProvider)
-        )
-            .build()
-    }
+        ).build()
 
     @Singleton
     @Provides
