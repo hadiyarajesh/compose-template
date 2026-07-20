@@ -31,9 +31,7 @@ interface HomeRepository {
 class HomeRepositoryImpl @Inject constructor(
     private val imageDao: ImageDao
 ) : HomeRepository {
-    override fun loadData(): Flow<Image?> {
-        return imageDao.getImages()
-    }
+    override fun loadData(): Flow<Image?> = imageDao.getImages()
 
     override suspend fun changeImage(image: Image) {
         imageDao.insertOrUpdateImage(image)

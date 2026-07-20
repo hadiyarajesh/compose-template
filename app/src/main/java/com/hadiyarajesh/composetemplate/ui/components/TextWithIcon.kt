@@ -34,37 +34,40 @@ internal fun TextWithIcon(
 ) {
     val iconId = "arrow_icon"
 
-    val annotatedText = buildAnnotatedString {
-        when (position) {
-            IconPositionInText.Leading -> {
-                appendInlineContent(iconId, iconId)
-                append(" ")
-                append(text)
-            }
+    val annotatedText =
+        buildAnnotatedString {
+            when (position) {
+                IconPositionInText.Leading -> {
+                    appendInlineContent(iconId, iconId)
+                    append(" ")
+                    append(text)
+                }
 
-            IconPositionInText.Trailing -> {
-                append(text)
-                append(" ")
-                appendInlineContent(iconId, iconId)
+                IconPositionInText.Trailing -> {
+                    append(text)
+                    append(" ")
+                    appendInlineContent(iconId, iconId)
+                }
             }
         }
-    }
 
-    val inlineContent = mapOf(
-        iconId to InlineTextContent(
-            Placeholder(
-                width = 16.sp,
-                height = 16.sp,
-                placeholderVerticalAlign = PlaceholderVerticalAlign.Center
-            )
-        ) {
-            Icon(
-                modifier = modifier,
-                painter = icon,
-                contentDescription = iconId
-            )
-        }
-    )
+    val inlineContent =
+        mapOf(
+            iconId to
+                InlineTextContent(
+                    Placeholder(
+                        width = 16.sp,
+                        height = 16.sp,
+                        placeholderVerticalAlign = PlaceholderVerticalAlign.Center
+                    )
+                ) {
+                    Icon(
+                        modifier = modifier,
+                        painter = icon,
+                        contentDescription = iconId
+                    )
+                }
+        )
 
     Text(
         text = annotatedText,

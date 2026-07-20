@@ -10,3 +10,4 @@
 local.properties
 app/schemas
 .kotlin
+gradle/gradle-daemon-jvm.properties

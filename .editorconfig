@@ -1,0 +1,31 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{kt,kts}]
+ktlint_code_style = intellij_idea
+# Jetpack Compose @Composable functions are intentionally PascalCase, so don't
+# flag them with ktlint's function-naming rule.
+ktlint_function_naming_ignore_when_annotated_with = Composable
+# No trailing comma after the last argument/parameter.
+ij_kotlin_allow_trailing_comma = false
+ij_kotlin_allow_trailing_comma_on_call_site = false
+# Keep an annotated primary constructor compact on one line, e.g.
+# `class HomeRepositoryImpl @Inject constructor(...)`, instead of wrapping
+# `@Inject` and `constructor` onto their own indented lines.
+ktlint_standard_class-signature = disabled
+# Generous line-length guard: flags only genuinely overlong lines and won't
+# force-wrap normal code or the compact constructor above.
+max_line_length = 140
+
+[*.{yml,yaml,json}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false

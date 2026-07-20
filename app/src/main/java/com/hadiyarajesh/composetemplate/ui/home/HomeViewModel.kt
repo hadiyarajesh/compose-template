@@ -24,10 +24,10 @@ internal class HomeViewModel @Inject constructor(
             _uiState.value = HomeScreenUiState.Loading
 
             try {
-                /**
-                 * [Image] object is explicitly marked as nullable because when we launch the app for the first time,
-                 * the database will be empty and Flow will return null value.
-                 * Once the [com.hadiyarajesh.composetemplate.data.database.DatabaseInitializer] populate local database, the Flow will emit updated value.
+                /*
+                 * The Image can be null: on first launch the database is empty and the
+                 * Flow emits null. Once DatabaseInitializer populates the database, the
+                 * Flow emits the stored value.
                  */
                 homeRepository
                     .loadData()
