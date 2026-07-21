@@ -62,7 +62,7 @@ internal fun HomeScreenRoute(onNavigateToDetail: (Image) -> Unit, viewModel: Hom
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun HomeScreenContent(
+internal fun HomeScreenContent(
     uiState: HomeScreenUiState,
     loadData: () -> Unit,
     onNavigateClick: (Image) -> Unit,

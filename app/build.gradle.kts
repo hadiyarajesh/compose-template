@@ -128,6 +128,7 @@ dependencies {
 
     // Compose Preview screenshot testing
     screenshotTestImplementation(composeBom)
+    screenshotTestImplementation(libs.screenshot.validation.api)
     screenshotTestImplementation(libs.ui.tooling)
 }
 

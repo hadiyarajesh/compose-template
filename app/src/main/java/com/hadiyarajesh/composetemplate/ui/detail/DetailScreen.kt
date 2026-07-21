@@ -53,7 +53,7 @@ internal fun DetailScreenRoute(image: Image, onBack: () -> Unit) {
  * of concerns.
  */
 @Composable
-private fun DetailScreenContent(image: Image, onBackClick: () -> Unit) {
+internal fun DetailScreenContent(image: Image, onBackClick: () -> Unit) {
     val context = LocalContext.current
     val uriHandler = LocalUriHandler.current
 
