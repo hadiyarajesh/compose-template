@@ -7,7 +7,8 @@ It includes the following popular libraries:
 - [Hilt](https://dagger.dev/hilt) - Hilt is a dependency injection library for Android that reduces the boilerplate of doing manual dependency injection in your project.
 - [Room](https://developer.android.com/training/data-storage/room) - Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite.
 - [Retrofit](https://github.com/square/retrofit) - A type-safe HTTP client for Android and the JVM.
-- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) - Kotlin multiplatform JSON serialization, used both for Retrofit responses (via Retrofit's first-party converter) and type-safe navigation arguments.
+- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) - Kotlin multiplatform JSON serialization, used both for Retrofit responses (via Retrofit's first-party converter) and type-safe navigation keys.
+- [Navigation 3](https://developer.android.com/guide/navigation/navigation-3) - The Compose-first navigation library. This template uses a developer-owned back stack rendered by `NavDisplay`, with typed keys that carry their arguments directly and built-in **predictive-back** gesture support.
 - [Coil](https://github.com/coil-kt/coil) - Image loading for Android backed by Kotlin Coroutines.
 
 ## How to use
@@ -34,8 +35,11 @@ Kotlin sources are formatted and linted with [Spotless](https://github.com/diffp
 
 ## Screenshot Testing
 
-UI components are covered by [Compose Preview screenshot tests](https://developer.android.com/studio/preview/compose-screenshot-testing).
-Any `@Preview` under `app/src/screenshotTest/` is rendered to a reference image.
+The Home and Detail screens plus reusable UI components are covered by
+[Compose Preview screenshot tests](https://developer.android.com/studio/preview/compose-screenshot-testing).
+A preview under `app/src/screenshotTest/` becomes a screenshot test when it is annotated
+with both `@Preview` and `@PreviewTest`; the committed reference images live under
+`app/src/screenshotTestDebug/reference/`.
 
 - Generate/refresh reference images: `./gradlew updateDebugScreenshotTest`
 - Verify against references: `./gradlew validateDebugScreenshotTest`
