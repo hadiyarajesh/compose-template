@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.room)
@@ -97,7 +96,9 @@ dependencies {
     implementation(composeBom)
     implementation(libs.bundles.compose.ui.impl)
     implementation(libs.material3)
-    implementation(libs.navigation.compose)
+    implementation(libs.navigation3.runtime)
+    implementation(libs.navigation3.ui)
+    implementation(libs.lifecycle.viewmodel.navigation3)
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
@@ -127,6 +128,7 @@ dependencies {
 
     // Compose Preview screenshot testing
     screenshotTestImplementation(composeBom)
+    screenshotTestImplementation(libs.screenshot.validation.api)
     screenshotTestImplementation(libs.ui.tooling)
 }
 
