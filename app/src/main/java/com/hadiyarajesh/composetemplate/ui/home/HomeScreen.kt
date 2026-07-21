@@ -21,10 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavController
 import com.hadiyarajesh.composetemplate.R
 import com.hadiyarajesh.composetemplate.data.database.entity.Image
-import com.hadiyarajesh.composetemplate.navigation.NavDestination
 import com.hadiyarajesh.composetemplate.ui.components.ErrorItem
 import com.hadiyarajesh.composetemplate.ui.components.ImageBox
 import com.hadiyarajesh.composetemplate.ui.components.LoadingIndicator
@@ -41,13 +39,13 @@ import com.hadiyarajesh.composetemplate.utility.ImageUtility
  * to separate concerns and enable previewing of the UI independently.
  */
 @Composable
-internal fun HomeScreenRoute(navController: NavController, viewModel: HomeViewModel = hiltViewModel()) {
+internal fun HomeScreenRoute(onNavigateToDetail: (Image) -> Unit, viewModel: HomeViewModel = hiltViewModel()) {
     val homeScreenUiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     HomeScreenContent(
         uiState = homeScreenUiState,
         loadData = { viewModel.loadData() },
-        onNavigateClick = { image -> navController.navigate(NavDestination.Detail(image)) },
+        onNavigateClick = onNavigateToDetail,
         onChangeImageClick = { image ->
             viewModel.changeImage(image)
         }

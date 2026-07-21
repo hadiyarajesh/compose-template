@@ -20,7 +20,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.hadiyarajesh.composetemplate.R
 import com.hadiyarajesh.composetemplate.data.database.entity.Image
 import com.hadiyarajesh.composetemplate.ui.components.ClickableUrlText
@@ -38,10 +37,10 @@ import com.hadiyarajesh.composetemplate.utility.ImageUtility
  * to separate concerns and enable previewing of the UI independently.
  */
 @Composable
-internal fun DetailScreenRoute(navController: NavController, image: Image) {
+internal fun DetailScreenRoute(image: Image, onBack: () -> Unit) {
     DetailScreenContent(
         image = image,
-        onBackClick = { navController.popBackStack() }
+        onBackClick = onBack
     )
 }
 

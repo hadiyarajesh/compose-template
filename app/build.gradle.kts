@@ -97,7 +97,6 @@ dependencies {
     implementation(composeBom)
     implementation(libs.bundles.compose.ui.impl)
     implementation(libs.material3)
-    implementation(libs.navigation.compose)
     implementation(libs.navigation3.runtime)
     implementation(libs.navigation3.ui)
     implementation(libs.lifecycle.viewmodel.navigation3)
