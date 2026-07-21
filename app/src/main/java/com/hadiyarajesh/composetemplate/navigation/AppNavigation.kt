@@ -15,10 +15,11 @@ import com.hadiyarajesh.composetemplate.ui.home.HomeScreenRoute
 
 @Composable
 fun AppNavigation(backStack: NavBackStack<NavKey>, modifier: Modifier = Modifier) {
+    val popBackStack: () -> Unit = { if (backStack.size > 1) backStack.removeLastOrNull() }
     NavDisplay(
         backStack = backStack,
         modifier = modifier,
-        onBack = { if (backStack.size > 1) backStack.removeLastOrNull() },
+        onBack = { popBackStack() },
         entryDecorators =
         listOf(
             rememberSaveableStateHolderNavEntryDecorator(),
@@ -37,7 +38,7 @@ fun AppNavigation(backStack: NavBackStack<NavKey>, modifier: Modifier = Modifier
             entry<NavDestination.Detail> { key ->
                 DetailScreenRoute(
                     image = key.image,
-                    onBack = { backStack.removeLastOrNull() }
+                    onBack = popBackStack
                 )
             }
         }
