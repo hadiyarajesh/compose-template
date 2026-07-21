@@ -1,8 +1,18 @@
 # Navigation 3 Migration — Design
 
 - **Date:** 2026-07-20
-- **Status:** Approved (pending spec review)
+- **Status:** Implemented
 - **Scope:** Replace Jetpack Navigation Compose (Nav2) with Navigation 3 (Nav3) in the Compose template. Faithful migration + predictive-back, single-pane.
+
+## Implementation notes (resolved values)
+
+- **Navigation 3:** runtime and ui at `1.1.4`.
+- **lifecycle-viewmodel-navigation3:** `2.10.0-rc01`.
+- **Nav2 transitive:** `navigation-compose` removed as direct dependency; still pulled transitively via `hilt-navigation-compose` (acceptable, verified in the build).
+- **API clarifications:**
+  - `NavBackStack` is generic: `NavBackStack<NavKey>`.
+  - `entry<T>` is a member of the `entryProvider` scope (no top-level import required).
+  - `predictivePopTransitionSpec` receives swipe-edge Int parameter in the transition spec.
 
 ## Context / current state
 
