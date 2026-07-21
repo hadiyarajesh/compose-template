@@ -39,7 +39,7 @@ spotless {
     // Only enforce/format files changed since the base branch (the whole project
     // has already been formatted once). CI must use a full checkout (fetch-depth: 0)
     // so this ref is available.
-    ratchetFrom("origin/master")
+    ratchetFrom("origin/main")
 
     kotlin {
         target("**/*.kt")

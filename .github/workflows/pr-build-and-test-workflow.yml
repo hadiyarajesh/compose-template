@@ -3,7 +3,7 @@ name: Build and test
 
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
     types: [ "opened", "reopened", "synchronize", "ready_for_review" ]
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
         with:
-          # Full history so Spotless `ratchetFrom origin/master` can diff against the base branch.
+          # Full history so Spotless `ratchetFrom origin/main` can diff against the base branch.
           fetch-depth: 0
       - name: Set up JDK 21
         uses: actions/setup-java@v5
