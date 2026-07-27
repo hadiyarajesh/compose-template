@@ -23,7 +23,7 @@ coroutinesTest = "1.11.0"
 turbine = "1.2.1"
 spotless = "8.8.0"
 ktlint = "1.8.0"
-screenshot = "0.0.1-alpha15"
+screenshot = "0.0.1-alpha16"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
