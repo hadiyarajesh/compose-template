@@ -11,6 +11,11 @@ plugins {
 }
 
 android {
+    testOptions {
+        // Compose logs recomposition errors via android.util.Log, which is absent on the JVM.
+        unitTests.isReturnDefaultValues = true
+    }
+
     namespace = "com.hadiyarajesh.composetemplate"
     compileSdk = 37
 
@@ -105,6 +110,7 @@ dependencies {
     ksp(libs.hilt.android.compiler)
 
     implementation(libs.bundles.room)
+    implementation(libs.molecule.runtime)
     ksp(libs.room.compiler)
 
     implementation(libs.bundles.retrofit)

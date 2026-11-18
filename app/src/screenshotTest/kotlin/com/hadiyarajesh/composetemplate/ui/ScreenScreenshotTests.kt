@@ -57,6 +57,6 @@ fun HomeScreenErrorPreview() {
 @Composable
 fun DetailScreenPreview() {
     AppTheme(dynamicColor = false) {
-        DetailScreenContent(image = sampleImage, onBackClick = {})
+        DetailScreenContent(image = sampleImage, onBackClick = {}, onOpenUrlFailed = {})
     }
 }

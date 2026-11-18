@@ -1,16 +1,22 @@
 package com.hadiyarajesh.composetemplate.ui.components
 
-import androidx.compose.foundation.border
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -20,8 +26,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.LinkAnnotation
@@ -30,6 +37,7 @@ import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
@@ -95,32 +103,55 @@ internal fun TopBarWithBackButton(modifier: Modifier = Modifier, title: String, 
                 )
             }
         },
-        title = { Text(text = title) }
+        title = { Text(text = title, fontWeight = FontWeight.Bold) }
+    )
+}
+
+/**
+ * Square, rounded, elevated card that shows [image] with loading and error states.
+ * [overlay] is drawn on top of the image, anchored to the bottom.
+ */
+@Composable
+internal fun ImageHero(modifier: Modifier = Modifier, image: Image, overlay: @Composable BoxScope.() -> Unit = {}) {
+    ElevatedCard(
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(28.dp),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp)
+    ) {
+        Box(modifier = Modifier.aspectRatio(1f)) {
+            SubcomposeAsyncImage(
+                modifier = Modifier.fillMaxSize(),
+                model = image.url,
+                contentDescription = image.description,
+                contentScale = ContentScale.Crop,
+                loading = { LoadingIndicator(strokeWidth = 2.dp) },
+                error = { ErrorItem(text = image.altText) }
+            )
+            overlay()
+        }
+    }
+}
+
+/** Bottom-anchored caption with a dark gradient so text stays readable on any photo. */
+@Composable
+internal fun BoxScope.ImageCaption(text: String) {
+    Text(
+        modifier = Modifier
+            .align(Alignment.BottomStart)
+            .fillMaxWidth()
+            .background(Brush.verticalGradient(listOf(Color.Transparent, Color.Black.copy(alpha = 0.65f))))
+            .padding(start = 20.dp, end = 20.dp, top = 40.dp, bottom = 16.dp),
+        text = text,
+        style = MaterialTheme.typography.titleMedium,
+        color = Color.White,
+        maxLines = 2,
+        overflow = TextOverflow.Ellipsis
     )
 }
 
 @Composable
-internal fun ImageBox(modifier: Modifier = Modifier, image: Image) {
-    val imageShape = RoundedCornerShape(16.dp)
-
-    Box(
-        modifier = modifier
-            .size(300.dp)
-            .clip(imageShape)
-            .border(1.dp, Color.LightGray, imageShape)
-    ) {
-        SubcomposeAsyncImage(
-            modifier = Modifier.fillMaxSize(),
-            model = image.url,
-            contentDescription = image.description,
-            loading = { LoadingIndicator(strokeWidth = 2.dp) },
-            error = { ErrorItem(text = image.altText) }
-        )
-    }
-}
-
-@Composable
 internal fun ClickableUrlText(modifier: Modifier = Modifier, url: String, onClick: (String) -> Unit) {
+    val linkColor = MaterialTheme.colorScheme.primary
     val annotatedString =
         buildAnnotatedString {
             withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
@@ -132,7 +163,7 @@ internal fun ClickableUrlText(modifier: Modifier = Modifier, url: String, onClic
                     url,
                     TextLinkStyles(
                         style = SpanStyle(
-                            color = Color.Blue,
+                            color = linkColor,
                             textDecoration = TextDecoration.Underline
                         )
                     )

@@ -12,4 +12,11 @@
     <string name="url">URL</string>
     <string name="failed_to_load_image">Failed to load image</string>
     <string name="failed_to_open_url">Failed to open URL</string>
+    <string name="view_details">View details</string>
+    <string name="new_image">New image</string>
+    <string name="about">About</string>
+    <string name="links">Links</string>
+    <string name="source_host">Source: %1$s</string>
+    <string name="open_in_browser">Open in browser</string>
+    <string name="retry">Try again</string>
 </resources>
