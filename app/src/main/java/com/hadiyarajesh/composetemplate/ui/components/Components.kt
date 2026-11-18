@@ -103,7 +103,7 @@ internal fun TopBarWithBackButton(modifier: Modifier = Modifier, title: String, 
                 )
             }
         },
-        title = { Text(text = title) }
+        title = { Text(text = title, fontWeight = FontWeight.Bold) }
     )
 }
 
