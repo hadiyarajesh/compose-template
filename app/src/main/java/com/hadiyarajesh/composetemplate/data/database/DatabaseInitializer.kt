@@ -40,7 +40,7 @@ class DatabaseInitializer(
         imageDaoProvider.get().insertOrUpdateImage(
             Image(
                 url = ImageUtility.getRandomImageUrl(),
-                description = context.getString(R.string.welcome_message),
+                description = context.getString(R.string.seed_image_description),
                 altText = context.getString(R.string.failed_to_load_image)
             )
         )
