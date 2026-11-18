@@ -24,6 +24,7 @@ turbine = "1.2.1"
 spotless = "8.11.0"
 ktlint = "1.8.0"
 screenshot = "0.0.1-alpha16"
+molecule = "2.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -62,6 +63,7 @@ kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coro
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 kotlin-metadata-jvm = { group = "org.jetbrains.kotlin", name = "kotlin-metadata-jvm", version.ref = "kotlin" }
 screenshot-validation-api = { group = "com.android.tools.screenshot", name = "screenshot-validation-api", version.ref = "screenshot" }
+molecule-runtime = { module = "app.cash.molecule:molecule-runtime", version.ref = "molecule" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

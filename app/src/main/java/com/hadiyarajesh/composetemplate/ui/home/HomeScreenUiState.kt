@@ -17,3 +17,10 @@ internal sealed interface HomeScreenUiState {
 
     data class Error(val msg: String) : HomeScreenUiState
 }
+
+/** Inputs to the Home presenter. */
+internal sealed interface HomeAction {
+    data object Start : HomeAction
+
+    data class ChangeImage(val image: Image) : HomeAction
+}
